@@ -1,0 +1,1069 @@
+
+
+Microchip MPLAB XC8 Assembler V2.05 build -831301201 
+                                                                                               Mon Apr 08 14:24:19 2019
+
+Microchip MPLAB XC8 C Compiler v2.05 (Free license) build 20181220022703 Og1 
+     1                           	processor	18F4550
+     2                           	fnconf	rparam,??,?,0
+     3                           	opt	pw 120
+     4                           	opt	flic
+     5                           	psect	cinit,global,reloc=2,class=CODE,delta=1
+     6                           	psect	cstackCOMRAM,global,class=COMRAM,space=1,delta=1,noexec
+     7                           	psect	text0,global,reloc=2,class=CODE,delta=1
+     8                           	psect	text1,global,reloc=2,class=CODE,delta=1
+     9                           	psect	text2,global,reloc=2,class=CODE,delta=1
+    10                           	psect	text3,global,reloc=2,class=CODE,delta=1
+    11                           	psect	text4,global,reloc=2,class=CODE,delta=1
+    12                           	psect	text5,global,reloc=2,class=CODE,delta=1
+    13                           	psect	intsave_regs,global,class=BIGRAM,space=1,delta=1,noexec
+    14                           	psect	rparam,global,class=COMRAM,space=1,delta=1,noexec
+    15  0000                     
+    16                           ; Version 2.05
+    17                           ; Generated 20/12/2018 GMT
+    18                           ; 
+    19                           ; Copyright © 2018, Microchip Technology Inc. and its subsidiaries ("Microchip")
+    20                           ; All rights reserved.
+    21                           ; 
+    22                           ; This software is developed by Microchip Technology Inc. and its subsidiaries ("Microch
+      +                          ip").
+    23                           ; 
+    24                           ; Redistribution and use in source and binary forms, with or without modification, are
+    25                           ; permitted provided that the following conditions are met:
+    26                           ; 
+    27                           ;     1. Redistributions of source code must retain the above copyright notice, this lis
+      +                          t of
+    28                           ;        conditions and the following disclaimer.
+    29                           ; 
+    30                           ;     2. Redistributions in binary form must reproduce the above copyright notice, this 
+      +                          list
+    31                           ;        of conditions and the following disclaimer in the documentation and/or other
+    32                           ;        materials provided with the distribution.
+    33                           ; 
+    34                           ;     3. Microchip's name may not be used to endorse or promote products derived from th
+      +                          is
+    35                           ;        software without specific prior written permission.
+    36                           ; 
+    37                           ; THIS SOFTWARE IS PROVIDED BY MICROCHIP "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES,
+    38                           ; INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS F
+      +                          OR
+    39                           ; PURPOSE ARE DISCLAIMED.  IN NO EVENT SHALL MICROCHIP BE LIABLE FOR ANY DIRECT, INDIREC
+      +                          T,
+    40                           ; INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING BUT NOT LIMITED TO
+    41                           ; PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA OR PROFITS; OR BUSINESS
+    42                           ; INTERRUPTION) HOWSOEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, ST
+      +                          RICT
+    43                           ; LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE U
+      +                          SE OF
+    44                           ; THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+    45                           ; 
+    46                           ; 
+    47                           ; Code-generator required, PIC18F4550 Definitions
+    48                           ; 
+    49                           ; SFR Addresses
+    50  0000                     _TRISAbits	set	3986
+    51  0000                     _TRISCbits	set	3988
+    52  0000                     _ADCON1	set	4033
+    53  0000                     _PORTCbits	set	3970
+    54  0000                     _PORTAbits	set	3968
+    55  0000                     _LATAbits	set	3977
+    56  0000                     _LATCbits	set	3979
+    57                           
+    58                           ; #config settings
+    59                           
+    60                           	psect	cinit
+    61  007DC6                     __pcinit:
+    62                           	opt callstack 0
+    63  007DC6                     start_initialization:
+    64                           	opt callstack 0
+    65  007DC6                     __initialization:
+    66                           	opt callstack 0
+    67  007DC6                     end_of_initialization:
+    68                           	opt callstack 0
+    69  007DC6                     __end_of__initialization:
+    70                           	opt callstack 0
+    71  007DC6  0100               	movlb	0
+    72  007DC8  EFED  F03E         	goto	_main	;jump to C main() function
+    73                           
+    74                           	psect	cstackCOMRAM
+    75  000001                     __pcstackCOMRAM:
+    76                           	opt callstack 0
+    77  000001                     envia_serial_pic@i:
+    78                           	opt callstack 0
+    79  000001                     envia_serial_terminal@i:
+    80                           	opt callstack 0
+    81  000001                     recebe_serial_terminal@invertido:
+    82                           	opt callstack 0
+    83  000001                     recebe_serial_pic@invertido:
+    84                           	opt callstack 0
+    85                           
+    86                           ; 8 bytes @ 0x0
+    87  000001                     	ds	2
+    88  000003                     envia_serial_pic@dado:
+    89                           	opt callstack 0
+    90  000003                     envia_serial_terminal@dado:
+    91                           	opt callstack 0
+    92                           
+    93                           ; 1 bytes @ 0x2
+    94  000003                     	ds	6
+    95  000009                     recebe_serial_terminal@j:
+    96                           	opt callstack 0
+    97  000009                     recebe_serial_pic@j:
+    98                           	opt callstack 0
+    99                           
+   100                           ; 2 bytes @ 0x8
+   101  000009                     	ds	2
+   102  00000B                     recebe_serial_terminal@i:
+   103                           	opt callstack 0
+   104  00000B                     recebe_serial_pic@i:
+   105                           	opt callstack 0
+   106                           
+   107                           ; 2 bytes @ 0xA
+   108  00000B                     	ds	2
+   109  00000D                     recebe_serial_terminal@x:
+   110                           	opt callstack 0
+   111  00000D                     recebe_serial_pic@x:
+   112                           	opt callstack 0
+   113                           
+   114                           ; 2 bytes @ 0xC
+   115  00000D                     	ds	2
+   116  00000F                     recebe_serial_terminal@dado:
+   117                           	opt callstack 0
+   118  00000F                     recebe_serial_pic@dado:
+   119                           	opt callstack 0
+   120                           
+   121                           ; 1 bytes @ 0xE
+   122  00000F                     	ds	1
+   123  000010                     main@dado:
+   124                           	opt callstack 0
+   125                           
+   126                           ; 1 bytes @ 0xF
+   127  000010                     	ds	1
+   128                           
+   129 ;;
+   130 ;;Main: autosize = 0, tempsize = 0, incstack = 0, save=0
+   131 ;;
+   132 ;; *************** function _main *****************
+   133 ;; Defined at:
+   134 ;;		line 12 in file "serial.c"
+   135 ;; Parameters:    Size  Location     Type
+   136 ;;		None
+   137 ;; Auto vars:     Size  Location     Type
+   138 ;;  dado            1   15[COMRAM] unsigned char 
+   139 ;; Return value:  Size  Location     Type
+   140 ;;                  1    wreg      void 
+   141 ;; Registers used:
+   142 ;;		wreg, fsr2l, fsr2h, status,2, status,0, cstack
+   143 ;; Tracked objects:
+   144 ;;		On entry : 0/0
+   145 ;;		On exit  : 0/0
+   146 ;;		Unchanged: 0/0
+   147 ;; Data sizes:     COMRAM   BANK0   BANK1   BANK2   BANK3   BANK4   BANK5   BANK6   BANK7
+   148 ;;      Params:         0       0       0       0       0       0       0       0       0
+   149 ;;      Locals:         1       0       0       0       0       0       0       0       0
+   150 ;;      Temps:          0       0       0       0       0       0       0       0       0
+   151 ;;      Totals:         1       0       0       0       0       0       0       0       0
+   152 ;;Total ram usage:        1 bytes
+   153 ;; Hardware stack levels required when called:    1
+   154 ;; This function calls:
+   155 ;;		_envia_serial_pic
+   156 ;;		_envia_serial_terminal
+   157 ;;		_portas
+   158 ;;		_recebe_serial_pic
+   159 ;;		_recebe_serial_terminal
+   160 ;; This function is called by:
+   161 ;;		Startup code after reset
+   162 ;; This function uses a non-reentrant model
+   163 ;;
+   164                           
+   165                           	psect	text0
+   166  007DDA                     __ptext0:
+   167                           	opt callstack 0
+   168  007DDA                     _main:
+   169                           	opt callstack 30
+   170                           
+   171                           ;serial.c: 14:     portas();
+   172                           
+   173                           ;incstack = 0
+   174  007DDA  ECE6  F03E         	call	_portas	;wreg free
+   175                           
+   176                           ;serial.c: 15:     char dado;;serial.c: 16:     LATCbits.LATC0 = 1;
+   177  007DDE  808B               	bsf	3979,0,c	;volatile
+   178                           
+   179                           ;serial.c: 17:     LATAbits.LA0 = 1;
+   180  007DE0  8089               	bsf	3977,0,c	;volatile
+   181  007DE2                     l871:
+   182                           
+   183                           ;serial.c: 21:         if (PORTAbits.RA1 == 0)
+   184  007DE2  B280               	btfsc	3968,1,c	;volatile
+   185  007DE4  D006               	goto	l879
+   186                           
+   187                           ;serial.c: 22:         {;serial.c: 23:             dado = recebe_serial_terminal();
+   188  007DE6  ECB0  F03F         	call	_recebe_serial_terminal	;wreg free
+   189  007DEA  6E10               	movwf	main@dado,c
+   190                           
+   191                           ;serial.c: 24:             envia_serial_pic(dado);
+   192  007DEC  5010               	movf	main@dado,w,c
+   193  007DEE  EC02  F03F         	call	_envia_serial_pic
+   194  007DF2                     l879:
+   195                           
+   196                           ;serial.c: 27:         if (PORTCbits.RC1 == 0)
+   197  007DF2  B282               	btfsc	3970,1,c	;volatile
+   198  007DF4  D7F6               	goto	l871
+   199                           
+   200                           ;serial.c: 28:         {;serial.c: 29:             dado = recebe_serial_pic();
+   201  007DF6  EC60  F03F         	call	_recebe_serial_pic	;wreg free
+   202  007DFA  6E10               	movwf	main@dado,c
+   203                           
+   204                           ;serial.c: 30:             envia_serial_terminal(dado);
+   205  007DFC  5010               	movf	main@dado,w,c
+   206  007DFE  EC31  F03F         	call	_envia_serial_terminal
+   207  007E02  D7EF               	goto	l871
+   208  007E04                     __end_of_main:
+   209                           	opt callstack 0
+   210                           
+   211 ;; *************** function _recebe_serial_terminal *****************
+   212 ;; Defined at:
+   213 ;;		line 65 in file "serial.c"
+   214 ;; Parameters:    Size  Location     Type
+   215 ;;		None
+   216 ;; Auto vars:     Size  Location     Type
+   217 ;;  invertido       8    0[COMRAM] unsigned char [8]
+   218 ;;  x               2   12[COMRAM] int 
+   219 ;;  i               2   10[COMRAM] int 
+   220 ;;  j               2    8[COMRAM] int 
+   221 ;;  dado            1   14[COMRAM] unsigned char 
+   222 ;; Return value:  Size  Location     Type
+   223 ;;                  1    wreg      unsigned char 
+   224 ;; Registers used:
+   225 ;;		wreg, fsr2l, fsr2h, status,2, status,0
+   226 ;; Tracked objects:
+   227 ;;		On entry : 0/0
+   228 ;;		On exit  : 0/0
+   229 ;;		Unchanged: 0/0
+   230 ;; Data sizes:     COMRAM   BANK0   BANK1   BANK2   BANK3   BANK4   BANK5   BANK6   BANK7
+   231 ;;      Params:         0       0       0       0       0       0       0       0       0
+   232 ;;      Locals:        15       0       0       0       0       0       0       0       0
+   233 ;;      Temps:          0       0       0       0       0       0       0       0       0
+   234 ;;      Totals:        15       0       0       0       0       0       0       0       0
+   235 ;;Total ram usage:       15 bytes
+   236 ;; Hardware stack levels used:    1
+   237 ;; This function calls:
+   238 ;;		Nothing
+   239 ;; This function is called by:
+   240 ;;		_main
+   241 ;; This function uses a non-reentrant model
+   242 ;;
+   243                           
+   244                           	psect	text1
+   245  007F60                     __ptext1:
+   246                           	opt callstack 0
+   247  007F60                     _recebe_serial_terminal:
+   248                           	opt callstack 30
+   249                           
+   250                           ;serial.c: 67:     int i,x;;serial.c: 68:     int j = 7;
+   251                           
+   252                           ;incstack = 0
+   253  007F60  0E00               	movlw	0
+   254  007F62  6E0A               	movwf	recebe_serial_terminal@j+1,c
+   255  007F64  0E07               	movlw	7
+   256  007F66  6E09               	movwf	recebe_serial_terminal@j,c
+   257                           
+   258                           ;serial.c: 69:     char invertido[8];;serial.c: 70:     char dado=0;
+   259  007F68  0E00               	movlw	0
+   260  007F6A  6E0F               	movwf	recebe_serial_terminal@dado,c
+   261                           
+   262                           ;serial.c: 72:     _delay((unsigned long)((416)*(8000000/4000000.0)));
+   263  007F6C  0EA6               	movlw	166
+   264  007F6E                     u137:
+   265  007F6E  D000               	nop2	
+   266  007F70  2EE8               	decfsz	wreg,f,c
+   267  007F72  D7FD               	bra	u137
+   268  007F74  D000               	nop2	
+   269                           
+   270                           ;serial.c: 73:     _delay((unsigned long)((833)*(8000000/4000000.0)));
+   271  007F76  0EEE               	movlw	238
+   272  007F78                     u147:
+   273  007F78  D000               	nop2	
+   274  007F7A  D000               	nop2	
+   275  007F7C  2EE8               	decfsz	wreg,f,c
+   276  007F7E  D7FC               	bra	u147
+   277                           
+   278                           ;serial.c: 74:     for(i=0;i<8;i++)
+   279  007F80  0E00               	movlw	0
+   280  007F82  6E0C               	movwf	recebe_serial_terminal@i+1,c
+   281  007F84  0E00               	movlw	0
+   282  007F86  6E0B               	movwf	recebe_serial_terminal@i,c
+   283  007F88                     l759:
+   284                           
+   285                           ;serial.c: 75:     {;serial.c: 76:         invertido[j]=PORTAbits.RA1;
+   286  007F88  0E01               	movlw	low recebe_serial_terminal@invertido
+   287  007F8A  2409               	addwf	recebe_serial_terminal@j,w,c
+   288  007F8C  6ED9               	movwf	fsr2l,c
+   289  007F8E  0E00               	movlw	high recebe_serial_terminal@invertido
+   290  007F90  200A               	addwfc	recebe_serial_terminal@j+1,w,c
+   291  007F92  6EDA               	movwf	fsr2h,c
+   292  007F94  A280               	btfss	3968,1,c	;volatile
+   293  007F96  D002               	goto	u10
+   294  007F98  0E01               	movlw	1
+   295  007F9A  D001               	goto	u16
+   296  007F9C                     u10:
+   297  007F9C  0E00               	movlw	0
+   298  007F9E                     u16:
+   299  007F9E  6EDF               	movwf	indf2,c
+   300                           
+   301                           ;serial.c: 77:         j--;
+   302  007FA0  0609               	decf	recebe_serial_terminal@j,f,c
+   303  007FA2  A0D8               	btfss	status,0,c
+   304  007FA4  060A               	decf	recebe_serial_terminal@j+1,f,c
+   305                           
+   306                           ;serial.c: 78:         _delay((unsigned long)((810)*(8000000/4000000.0)));
+   307  007FA6  0EE7               	movlw	231
+   308  007FA8                     u157:
+   309  007FA8  D000               	nop2	
+   310  007FAA  D000               	nop2	
+   311  007FAC  2EE8               	decfsz	wreg,f,c
+   312  007FAE  D7FC               	bra	u157
+   313  007FB0  D000               	nop2	
+   314  007FB2  F000               	nop	
+   315                           
+   316                           ;serial.c: 79:     }
+   317  007FB4  4A0B               	infsnz	recebe_serial_terminal@i,f,c
+   318  007FB6  2A0C               	incf	recebe_serial_terminal@i+1,f,c
+   319  007FB8  BE0C               	btfsc	recebe_serial_terminal@i+1,7,c
+   320  007FBA  D7E6               	goto	l759
+   321  007FBC  500C               	movf	recebe_serial_terminal@i+1,w,c
+   322  007FBE  E104               	bnz	u20
+   323  007FC0  0E08               	movlw	8
+   324  007FC2  5C0B               	subwf	recebe_serial_terminal@i,w,c
+   325  007FC4  A0D8               	btfss	status,0,c
+   326  007FC6  D7E0               	goto	l759
+   327  007FC8                     u20:
+   328                           
+   329                           ;serial.c: 80:     for(x=0;x<8;x++)
+   330  007FC8  0E00               	movlw	0
+   331  007FCA  6E0E               	movwf	recebe_serial_terminal@x+1,c
+   332  007FCC  0E00               	movlw	0
+   333  007FCE  6E0D               	movwf	recebe_serial_terminal@x,c
+   334  007FD0                     l775:
+   335                           
+   336                           ;serial.c: 81:     {;serial.c: 82:         dado = dado <<1;
+   337  007FD0  500F               	movf	recebe_serial_terminal@dado,w,c
+   338  007FD2  240F               	addwf	recebe_serial_terminal@dado,w,c
+   339  007FD4  6E0F               	movwf	recebe_serial_terminal@dado,c
+   340                           
+   341                           ;serial.c: 83:         dado = dado + invertido[x];
+   342  007FD6  0E01               	movlw	low recebe_serial_terminal@invertido
+   343  007FD8  240D               	addwf	recebe_serial_terminal@x,w,c
+   344  007FDA  6ED9               	movwf	fsr2l,c
+   345  007FDC  0E00               	movlw	high recebe_serial_terminal@invertido
+   346  007FDE  200E               	addwfc	recebe_serial_terminal@x+1,w,c
+   347  007FE0  6EDA               	movwf	fsr2h,c
+   348  007FE2  50DF               	movf	indf2,w,c
+   349  007FE4  240F               	addwf	recebe_serial_terminal@dado,w,c
+   350  007FE6  6E0F               	movwf	recebe_serial_terminal@dado,c
+   351                           
+   352                           ;serial.c: 84:     }
+   353  007FE8  4A0D               	infsnz	recebe_serial_terminal@x,f,c
+   354  007FEA  2A0E               	incf	recebe_serial_terminal@x+1,f,c
+   355  007FEC  BE0E               	btfsc	recebe_serial_terminal@x+1,7,c
+   356  007FEE  D7F0               	goto	l775
+   357  007FF0  500E               	movf	recebe_serial_terminal@x+1,w,c
+   358  007FF2  E104               	bnz	u30
+   359  007FF4  0E08               	movlw	8
+   360  007FF6  5C0D               	subwf	recebe_serial_terminal@x,w,c
+   361  007FF8  A0D8               	btfss	status,0,c
+   362  007FFA  D7EA               	goto	l775
+   363  007FFC                     u30:
+   364                           
+   365                           ;serial.c: 85:     return dado;
+   366  007FFC  500F               	movf	recebe_serial_terminal@dado,w,c
+   367  007FFE  0012               	return		;funcret
+   368  008000                     __end_of_recebe_serial_terminal:
+   369                           	opt callstack 0
+   370                           
+   371 ;; *************** function _recebe_serial_pic *****************
+   372 ;; Defined at:
+   373 ;;		line 87 in file "serial.c"
+   374 ;; Parameters:    Size  Location     Type
+   375 ;;		None
+   376 ;; Auto vars:     Size  Location     Type
+   377 ;;  invertido       8    0[COMRAM] unsigned char [8]
+   378 ;;  x               2   12[COMRAM] int 
+   379 ;;  i               2   10[COMRAM] int 
+   380 ;;  j               2    8[COMRAM] int 
+   381 ;;  dado            1   14[COMRAM] unsigned char 
+   382 ;; Return value:  Size  Location     Type
+   383 ;;                  1    wreg      unsigned char 
+   384 ;; Registers used:
+   385 ;;		wreg, fsr2l, fsr2h, status,2, status,0
+   386 ;; Tracked objects:
+   387 ;;		On entry : 0/0
+   388 ;;		On exit  : 0/0
+   389 ;;		Unchanged: 0/0
+   390 ;; Data sizes:     COMRAM   BANK0   BANK1   BANK2   BANK3   BANK4   BANK5   BANK6   BANK7
+   391 ;;      Params:         0       0       0       0       0       0       0       0       0
+   392 ;;      Locals:        15       0       0       0       0       0       0       0       0
+   393 ;;      Temps:          0       0       0       0       0       0       0       0       0
+   394 ;;      Totals:        15       0       0       0       0       0       0       0       0
+   395 ;;Total ram usage:       15 bytes
+   396 ;; Hardware stack levels used:    1
+   397 ;; This function calls:
+   398 ;;		Nothing
+   399 ;; This function is called by:
+   400 ;;		_main
+   401 ;; This function uses a non-reentrant model
+   402 ;;
+   403                           
+   404                           	psect	text2
+   405  007EC0                     __ptext2:
+   406                           	opt callstack 0
+   407  007EC0                     _recebe_serial_pic:
+   408                           	opt callstack 30
+   409                           
+   410                           ;serial.c: 89:  int i,x;;serial.c: 90:     int j = 7;
+   411                           
+   412                           ;incstack = 0
+   413  007EC0  0E00               	movlw	0
+   414  007EC2  6E0A               	movwf	recebe_serial_pic@j+1,c
+   415  007EC4  0E07               	movlw	7
+   416  007EC6  6E09               	movwf	recebe_serial_pic@j,c
+   417                           
+   418                           ;serial.c: 91:     char invertido[8];;serial.c: 92:     char dado=0;
+   419  007EC8  0E00               	movlw	0
+   420  007ECA  6E0F               	movwf	recebe_serial_pic@dado,c
+   421                           
+   422                           ;serial.c: 94:     _delay((unsigned long)((416)*(8000000/4000000.0)));
+   423  007ECC  0EA6               	movlw	166
+   424  007ECE                     u167:
+   425  007ECE  D000               	nop2	
+   426  007ED0  2EE8               	decfsz	wreg,f,c
+   427  007ED2  D7FD               	bra	u167
+   428  007ED4  D000               	nop2	
+   429                           
+   430                           ;serial.c: 95:     _delay((unsigned long)((833)*(8000000/4000000.0)));
+   431  007ED6  0EEE               	movlw	238
+   432  007ED8                     u177:
+   433  007ED8  D000               	nop2	
+   434  007EDA  D000               	nop2	
+   435  007EDC  2EE8               	decfsz	wreg,f,c
+   436  007EDE  D7FC               	bra	u177
+   437                           
+   438                           ;serial.c: 96:     for(i=0;i<8;i++)
+   439  007EE0  0E00               	movlw	0
+   440  007EE2  6E0C               	movwf	recebe_serial_pic@i+1,c
+   441  007EE4  0E00               	movlw	0
+   442  007EE6  6E0B               	movwf	recebe_serial_pic@i,c
+   443  007EE8                     l817:
+   444                           
+   445                           ;serial.c: 97:     {;serial.c: 98:         invertido[j]=PORTCbits.RC1;
+   446  007EE8  0E01               	movlw	low recebe_serial_pic@invertido
+   447  007EEA  2409               	addwf	recebe_serial_pic@j,w,c
+   448  007EEC  6ED9               	movwf	fsr2l,c
+   449  007EEE  0E00               	movlw	high recebe_serial_pic@invertido
+   450  007EF0  200A               	addwfc	recebe_serial_pic@j+1,w,c
+   451  007EF2  6EDA               	movwf	fsr2h,c
+   452  007EF4  A282               	btfss	3970,1,c	;volatile
+   453  007EF6  D002               	goto	u60
+   454  007EF8  0E01               	movlw	1
+   455  007EFA  D001               	goto	u66
+   456  007EFC                     u60:
+   457  007EFC  0E00               	movlw	0
+   458  007EFE                     u66:
+   459  007EFE  6EDF               	movwf	indf2,c
+   460                           
+   461                           ;serial.c: 99:         j--;
+   462  007F00  0609               	decf	recebe_serial_pic@j,f,c
+   463  007F02  A0D8               	btfss	status,0,c
+   464  007F04  060A               	decf	recebe_serial_pic@j+1,f,c
+   465                           
+   466                           ;serial.c: 100:         _delay((unsigned long)((810)*(8000000/4000000.0)));
+   467  007F06  0EE7               	movlw	231
+   468  007F08                     u187:
+   469  007F08  D000               	nop2	
+   470  007F0A  D000               	nop2	
+   471  007F0C  2EE8               	decfsz	wreg,f,c
+   472  007F0E  D7FC               	bra	u187
+   473  007F10  D000               	nop2	
+   474  007F12  F000               	nop	
+   475                           
+   476                           ;serial.c: 101:     }
+   477  007F14  4A0B               	infsnz	recebe_serial_pic@i,f,c
+   478  007F16  2A0C               	incf	recebe_serial_pic@i+1,f,c
+   479  007F18  BE0C               	btfsc	recebe_serial_pic@i+1,7,c
+   480  007F1A  D7E6               	goto	l817
+   481  007F1C  500C               	movf	recebe_serial_pic@i+1,w,c
+   482  007F1E  E104               	bnz	u70
+   483  007F20  0E08               	movlw	8
+   484  007F22  5C0B               	subwf	recebe_serial_pic@i,w,c
+   485  007F24  A0D8               	btfss	status,0,c
+   486  007F26  D7E0               	goto	l817
+   487  007F28                     u70:
+   488                           
+   489                           ;serial.c: 102:     for(x=0;x<8;x++)
+   490  007F28  0E00               	movlw	0
+   491  007F2A  6E0E               	movwf	recebe_serial_pic@x+1,c
+   492  007F2C  0E00               	movlw	0
+   493  007F2E  6E0D               	movwf	recebe_serial_pic@x,c
+   494  007F30                     l833:
+   495                           
+   496                           ;serial.c: 103:     {;serial.c: 104:         dado = dado <<1;
+   497  007F30  500F               	movf	recebe_serial_pic@dado,w,c
+   498  007F32  240F               	addwf	recebe_serial_pic@dado,w,c
+   499  007F34  6E0F               	movwf	recebe_serial_pic@dado,c
+   500                           
+   501                           ;serial.c: 105:         dado = dado + invertido[x];
+   502  007F36  0E01               	movlw	low recebe_serial_pic@invertido
+   503  007F38  240D               	addwf	recebe_serial_pic@x,w,c
+   504  007F3A  6ED9               	movwf	fsr2l,c
+   505  007F3C  0E00               	movlw	high recebe_serial_pic@invertido
+   506  007F3E  200E               	addwfc	recebe_serial_pic@x+1,w,c
+   507  007F40  6EDA               	movwf	fsr2h,c
+   508  007F42  50DF               	movf	indf2,w,c
+   509  007F44  240F               	addwf	recebe_serial_pic@dado,w,c
+   510  007F46  6E0F               	movwf	recebe_serial_pic@dado,c
+   511                           
+   512                           ;serial.c: 106:     }
+   513  007F48  4A0D               	infsnz	recebe_serial_pic@x,f,c
+   514  007F4A  2A0E               	incf	recebe_serial_pic@x+1,f,c
+   515  007F4C  BE0E               	btfsc	recebe_serial_pic@x+1,7,c
+   516  007F4E  D7F0               	goto	l833
+   517  007F50  500E               	movf	recebe_serial_pic@x+1,w,c
+   518  007F52  E104               	bnz	u80
+   519  007F54  0E08               	movlw	8
+   520  007F56  5C0D               	subwf	recebe_serial_pic@x,w,c
+   521  007F58  A0D8               	btfss	status,0,c
+   522  007F5A  D7EA               	goto	l833
+   523  007F5C                     u80:
+   524                           
+   525                           ;serial.c: 107:     return dado;
+   526  007F5C  500F               	movf	recebe_serial_pic@dado,w,c
+   527  007F5E  0012               	return		;funcret
+   528  007F60                     __end_of_recebe_serial_pic:
+   529                           	opt callstack 0
+   530                           
+   531 ;; *************** function _portas *****************
+   532 ;; Defined at:
+   533 ;;		line 109 in file "serial.c"
+   534 ;; Parameters:    Size  Location     Type
+   535 ;;		None
+   536 ;; Auto vars:     Size  Location     Type
+   537 ;;		None
+   538 ;; Return value:  Size  Location     Type
+   539 ;;                  1    wreg      void 
+   540 ;; Registers used:
+   541 ;;		wreg, status,2
+   542 ;; Tracked objects:
+   543 ;;		On entry : 0/0
+   544 ;;		On exit  : 0/0
+   545 ;;		Unchanged: 0/0
+   546 ;; Data sizes:     COMRAM   BANK0   BANK1   BANK2   BANK3   BANK4   BANK5   BANK6   BANK7
+   547 ;;      Params:         0       0       0       0       0       0       0       0       0
+   548 ;;      Locals:         0       0       0       0       0       0       0       0       0
+   549 ;;      Temps:          0       0       0       0       0       0       0       0       0
+   550 ;;      Totals:         0       0       0       0       0       0       0       0       0
+   551 ;;Total ram usage:        0 bytes
+   552 ;; Hardware stack levels used:    1
+   553 ;; This function calls:
+   554 ;;		Nothing
+   555 ;; This function is called by:
+   556 ;;		_main
+   557 ;; This function uses a non-reentrant model
+   558 ;;
+   559                           
+   560                           	psect	text3
+   561  007DCC                     __ptext3:
+   562                           	opt callstack 0
+   563  007DCC                     _portas:
+   564                           	opt callstack 30
+   565                           
+   566                           ;serial.c: 111:     ADCON1 = 0x0F;
+   567                           
+   568                           ;incstack = 0
+   569  007DCC  0E0F               	movlw	15
+   570  007DCE  6EC1               	movwf	4033,c	;volatile
+   571                           
+   572                           ;serial.c: 112:     TRISCbits.TRISC0 = 0;
+   573  007DD0  9094               	bcf	3988,0,c	;volatile
+   574                           
+   575                           ;serial.c: 113:     TRISCbits.TRISC1 = 1;
+   576  007DD2  8294               	bsf	3988,1,c	;volatile
+   577                           
+   578                           ;serial.c: 114:     TRISAbits.TRISA0 = 0;
+   579  007DD4  9092               	bcf	3986,0,c	;volatile
+   580                           
+   581                           ;serial.c: 115:     TRISAbits.TRISA1 = 1;
+   582  007DD6  8292               	bsf	3986,1,c	;volatile
+   583  007DD8  0012               	return		;funcret
+   584  007DDA                     __end_of_portas:
+   585                           	opt callstack 0
+   586                           
+   587 ;; *************** function _envia_serial_terminal *****************
+   588 ;; Defined at:
+   589 ;;		line 50 in file "serial.c"
+   590 ;; Parameters:    Size  Location     Type
+   591 ;;  dado            1    wreg     unsigned char 
+   592 ;; Auto vars:     Size  Location     Type
+   593 ;;  dado            1    2[COMRAM] unsigned char 
+   594 ;;  i               2    0[COMRAM] int 
+   595 ;; Return value:  Size  Location     Type
+   596 ;;                  1    wreg      void 
+   597 ;; Registers used:
+   598 ;;		wreg, status,2, status,0
+   599 ;; Tracked objects:
+   600 ;;		On entry : 0/0
+   601 ;;		On exit  : 0/0
+   602 ;;		Unchanged: 0/0
+   603 ;; Data sizes:     COMRAM   BANK0   BANK1   BANK2   BANK3   BANK4   BANK5   BANK6   BANK7
+   604 ;;      Params:         0       0       0       0       0       0       0       0       0
+   605 ;;      Locals:         3       0       0       0       0       0       0       0       0
+   606 ;;      Temps:          0       0       0       0       0       0       0       0       0
+   607 ;;      Totals:         3       0       0       0       0       0       0       0       0
+   608 ;;Total ram usage:        3 bytes
+   609 ;; Hardware stack levels used:    1
+   610 ;; This function calls:
+   611 ;;		Nothing
+   612 ;; This function is called by:
+   613 ;;		_main
+   614 ;; This function uses a non-reentrant model
+   615 ;;
+   616                           
+   617                           	psect	text4
+   618  007E62                     __ptext4:
+   619                           	opt callstack 0
+   620  007E62                     _envia_serial_terminal:
+   621                           	opt callstack 30
+   622                           
+   623                           ;incstack = 0
+   624                           ;envia_serial_terminal@dado stored from wreg
+   625  007E62  6E03               	movwf	envia_serial_terminal@dado,c
+   626                           
+   627                           ;serial.c: 50: void envia_serial_terminal(char dado);serial.c: 51: {;serial.c: 52:     L
+      +                          ATAbits.LATA0 = 1;
+   628  007E64  8089               	bsf	3977,0,c	;volatile
+   629                           
+   630                           ;serial.c: 53:     _delay((unsigned long)((833)*(8000000/4000000.0)));
+   631  007E66  0EEE               	movlw	238
+   632  007E68                     u197:
+   633  007E68  D000               	nop2	
+   634  007E6A  D000               	nop2	
+   635  007E6C  2EE8               	decfsz	wreg,f,c
+   636  007E6E  D7FC               	bra	u197
+   637                           
+   638                           ;serial.c: 54:     LATAbits.LATA0 = 0;
+   639  007E70  9089               	bcf	3977,0,c	;volatile
+   640                           
+   641                           ;serial.c: 55:     _delay((unsigned long)((833)*(8000000/4000000.0)));
+   642  007E72  0EEE               	movlw	238
+   643  007E74                     u207:
+   644  007E74  D000               	nop2	
+   645  007E76  D000               	nop2	
+   646  007E78  2EE8               	decfsz	wreg,f,c
+   647  007E7A  D7FC               	bra	u207
+   648                           
+   649                           ;serial.c: 56:     for(int i = 0;i<8;i++)
+   650  007E7C  0E00               	movlw	0
+   651  007E7E  6E02               	movwf	envia_serial_terminal@i+1,c
+   652  007E80  0E00               	movlw	0
+   653  007E82  6E01               	movwf	envia_serial_terminal@i,c
+   654  007E84                     l44:
+   655                           
+   656                           ;serial.c: 57:     {;serial.c: 58:         LATAbits.LATA0 = dado;
+   657  007E84  B003               	btfsc	envia_serial_terminal@dado,0,c
+   658  007E86  D002               	bra	u95
+   659  007E88  9089               	bcf	3977,0,c	;volatile
+   660  007E8A  D001               	bra	u96
+   661  007E8C                     u95:
+   662  007E8C  8089               	bsf	3977,0,c	;volatile
+   663  007E8E                     u96:
+   664                           
+   665                           ;serial.c: 59:         dado = dado>>1;
+   666  007E8E  90D8               	bcf	status,0,c
+   667  007E90  3003               	rrcf	envia_serial_terminal@dado,w,c
+   668  007E92  6E03               	movwf	envia_serial_terminal@dado,c
+   669                           
+   670                           ;serial.c: 60:         _delay((unsigned long)((833)*(8000000/4000000.0)));
+   671  007E94  0EEE               	movlw	238
+   672  007E96                     u217:
+   673  007E96  D000               	nop2	
+   674  007E98  D000               	nop2	
+   675  007E9A  2EE8               	decfsz	wreg,f,c
+   676  007E9C  D7FC               	bra	u217
+   677                           
+   678                           ;serial.c: 61:     }
+   679  007E9E  4A01               	infsnz	envia_serial_terminal@i,f,c
+   680  007EA0  2A02               	incf	envia_serial_terminal@i+1,f,c
+   681  007EA2  BE02               	btfsc	envia_serial_terminal@i+1,7,c
+   682  007EA4  D7EF               	goto	l44
+   683  007EA6  5002               	movf	envia_serial_terminal@i+1,w,c
+   684  007EA8  E104               	bnz	u100
+   685  007EAA  0E08               	movlw	8
+   686  007EAC  5C01               	subwf	envia_serial_terminal@i,w,c
+   687  007EAE  A0D8               	btfss	status,0,c
+   688  007EB0  D7E9               	goto	l44
+   689  007EB2                     u100:
+   690                           
+   691                           ;serial.c: 62:     LATAbits.LATA0 = 1;
+   692  007EB2  8089               	bsf	3977,0,c	;volatile
+   693                           
+   694                           ;serial.c: 63:     _delay((unsigned long)((833)*(8000000/4000000.0)));
+   695  007EB4  0EEE               	movlw	238
+   696  007EB6                     u227:
+   697  007EB6  D000               	nop2	
+   698  007EB8  D000               	nop2	
+   699  007EBA  2EE8               	decfsz	wreg,f,c
+   700  007EBC  D7FC               	bra	u227
+   701  007EBE  0012               	return		;funcret
+   702  007EC0                     __end_of_envia_serial_terminal:
+   703                           	opt callstack 0
+   704                           
+   705 ;; *************** function _envia_serial_pic *****************
+   706 ;; Defined at:
+   707 ;;		line 35 in file "serial.c"
+   708 ;; Parameters:    Size  Location     Type
+   709 ;;  dado            1    wreg     unsigned char 
+   710 ;; Auto vars:     Size  Location     Type
+   711 ;;  dado            1    2[COMRAM] unsigned char 
+   712 ;;  i               2    0[COMRAM] int 
+   713 ;; Return value:  Size  Location     Type
+   714 ;;                  1    wreg      void 
+   715 ;; Registers used:
+   716 ;;		wreg, status,2, status,0
+   717 ;; Tracked objects:
+   718 ;;		On entry : 0/0
+   719 ;;		On exit  : 0/0
+   720 ;;		Unchanged: 0/0
+   721 ;; Data sizes:     COMRAM   BANK0   BANK1   BANK2   BANK3   BANK4   BANK5   BANK6   BANK7
+   722 ;;      Params:         0       0       0       0       0       0       0       0       0
+   723 ;;      Locals:         3       0       0       0       0       0       0       0       0
+   724 ;;      Temps:          0       0       0       0       0       0       0       0       0
+   725 ;;      Totals:         3       0       0       0       0       0       0       0       0
+   726 ;;Total ram usage:        3 bytes
+   727 ;; Hardware stack levels used:    1
+   728 ;; This function calls:
+   729 ;;		Nothing
+   730 ;; This function is called by:
+   731 ;;		_main
+   732 ;; This function uses a non-reentrant model
+   733 ;;
+   734                           
+   735                           	psect	text5
+   736  007E04                     __ptext5:
+   737                           	opt callstack 0
+   738  007E04                     _envia_serial_pic:
+   739                           	opt callstack 30
+   740                           
+   741                           ;incstack = 0
+   742                           ;envia_serial_pic@dado stored from wreg
+   743  007E04  6E03               	movwf	envia_serial_pic@dado,c
+   744                           
+   745                           ;serial.c: 35: void envia_serial_pic(char dado);serial.c: 36: {;serial.c: 37:     LATCbi
+      +                          ts.LATC0 = 1;
+   746  007E06  808B               	bsf	3979,0,c	;volatile
+   747                           
+   748                           ;serial.c: 38:     _delay((unsigned long)((833)*(8000000/4000000.0)));
+   749  007E08  0EEE               	movlw	238
+   750  007E0A                     u237:
+   751  007E0A  D000               	nop2	
+   752  007E0C  D000               	nop2	
+   753  007E0E  2EE8               	decfsz	wreg,f,c
+   754  007E10  D7FC               	bra	u237
+   755                           
+   756                           ;serial.c: 39:     LATCbits.LATC0 = 0;
+   757  007E12  908B               	bcf	3979,0,c	;volatile
+   758                           
+   759                           ;serial.c: 40:     _delay((unsigned long)((833)*(8000000/4000000.0)));
+   760  007E14  0EEE               	movlw	238
+   761  007E16                     u247:
+   762  007E16  D000               	nop2	
+   763  007E18  D000               	nop2	
+   764  007E1A  2EE8               	decfsz	wreg,f,c
+   765  007E1C  D7FC               	bra	u247
+   766                           
+   767                           ;serial.c: 41:     for(int i = 0;i<8;i++)
+   768  007E1E  0E00               	movlw	0
+   769  007E20  6E02               	movwf	envia_serial_pic@i+1,c
+   770  007E22  0E00               	movlw	0
+   771  007E24  6E01               	movwf	envia_serial_pic@i,c
+   772  007E26                     l39:
+   773                           
+   774                           ;serial.c: 42:     {;serial.c: 43:         LATCbits.LATC0 = dado;
+   775  007E26  B003               	btfsc	envia_serial_pic@dado,0,c
+   776  007E28  D002               	bra	u45
+   777  007E2A  908B               	bcf	3979,0,c	;volatile
+   778  007E2C  D001               	bra	u46
+   779  007E2E                     u45:
+   780  007E2E  808B               	bsf	3979,0,c	;volatile
+   781  007E30                     u46:
+   782                           
+   783                           ;serial.c: 44:         dado = dado >> 1;
+   784  007E30  90D8               	bcf	status,0,c
+   785  007E32  3003               	rrcf	envia_serial_pic@dado,w,c
+   786  007E34  6E03               	movwf	envia_serial_pic@dado,c
+   787                           
+   788                           ;serial.c: 45:         _delay((unsigned long)((833)*(8000000/4000000.0)));
+   789  007E36  0EEE               	movlw	238
+   790  007E38                     u257:
+   791  007E38  D000               	nop2	
+   792  007E3A  D000               	nop2	
+   793  007E3C  2EE8               	decfsz	wreg,f,c
+   794  007E3E  D7FC               	bra	u257
+   795                           
+   796                           ;serial.c: 46:     }
+   797  007E40  4A01               	infsnz	envia_serial_pic@i,f,c
+   798  007E42  2A02               	incf	envia_serial_pic@i+1,f,c
+   799  007E44  BE02               	btfsc	envia_serial_pic@i+1,7,c
+   800  007E46  D7EF               	goto	l39
+   801  007E48  5002               	movf	envia_serial_pic@i+1,w,c
+   802  007E4A  E104               	bnz	u50
+   803  007E4C  0E08               	movlw	8
+   804  007E4E  5C01               	subwf	envia_serial_pic@i,w,c
+   805  007E50  A0D8               	btfss	status,0,c
+   806  007E52  D7E9               	goto	l39
+   807  007E54                     u50:
+   808                           
+   809                           ;serial.c: 47:     LATCbits.LATC0 = 1;
+   810  007E54  808B               	bsf	3979,0,c	;volatile
+   811                           
+   812                           ;serial.c: 48:     _delay((unsigned long)((833)*(8000000/4000000.0)));
+   813  007E56  0EEE               	movlw	238
+   814  007E58                     u267:
+   815  007E58  D000               	nop2	
+   816  007E5A  D000               	nop2	
+   817  007E5C  2EE8               	decfsz	wreg,f,c
+   818  007E5E  D7FC               	bra	u267
+   819  007E60  0012               	return		;funcret
+   820  007E62                     __end_of_envia_serial_pic:
+   821                           	opt callstack 0
+   822  0000                     
+   823                           	psect	rparam
+   824  0000                     tosu	equ	0xFFF
+   825                           tosh	equ	0xFFE
+   826                           tosl	equ	0xFFD
+   827                           stkptr	equ	0xFFC
+   828                           pclatu	equ	0xFFB
+   829                           pclath	equ	0xFFA
+   830                           pcl	equ	0xFF9
+   831                           tblptru	equ	0xFF8
+   832                           tblptrh	equ	0xFF7
+   833                           tblptrl	equ	0xFF6
+   834                           tablat	equ	0xFF5
+   835                           prodh	equ	0xFF4
+   836                           prodl	equ	0xFF3
+   837                           indf0	equ	0xFEF
+   838                           postinc0	equ	0xFEE
+   839                           postdec0	equ	0xFED
+   840                           preinc0	equ	0xFEC
+   841                           plusw0	equ	0xFEB
+   842                           fsr0h	equ	0xFEA
+   843                           fsr0l	equ	0xFE9
+   844                           wreg	equ	0xFE8
+   845                           indf1	equ	0xFE7
+   846                           postinc1	equ	0xFE6
+   847                           postdec1	equ	0xFE5
+   848                           preinc1	equ	0xFE4
+   849                           plusw1	equ	0xFE3
+   850                           fsr1h	equ	0xFE2
+   851                           fsr1l	equ	0xFE1
+   852                           bsr	equ	0xFE0
+   853                           indf2	equ	0xFDF
+   854                           postinc2	equ	0xFDE
+   855                           postdec2	equ	0xFDD
+   856                           preinc2	equ	0xFDC
+   857                           plusw2	equ	0xFDB
+   858                           fsr2h	equ	0xFDA
+   859                           fsr2l	equ	0xFD9
+   860                           status	equ	0xFD8
+
+
+Data Sizes:
+    Strings     0
+    Constant    0
+    Data        0
+    BSS         0
+    Persistent  0
+    Stack       0
+
+Auto Spaces:
+    Space          Size  Autos    Used
+    COMRAM           95     16      16
+    BANK0           160      0       0
+    BANK1           256      0       0
+    BANK2           256      0       0
+    BANK3           256      0       0
+    BANK4           256      0       0
+    BANK5           256      0       0
+    BANK6           256      0       0
+    BANK7           256      0       0
+
+Pointer List with Targets:
+
+    None.
+
+Critical Paths under _main in COMRAM
+
+    _main->_recebe_serial_pic
+    _main->_recebe_serial_terminal
+
+Critical Paths under _main in BANK0
+
+    None.
+
+Critical Paths under _main in BANK1
+
+    None.
+
+Critical Paths under _main in BANK2
+
+    None.
+
+Critical Paths under _main in BANK3
+
+    None.
+
+Critical Paths under _main in BANK4
+
+    None.
+
+Critical Paths under _main in BANK5
+
+    None.
+
+Critical Paths under _main in BANK6
+
+    None.
+
+Critical Paths under _main in BANK7
+
+    None.
+
+Call Graph Tables:
+
+ ---------------------------------------------------------------------------------
+ (Depth) Function   	        Calls       Base Space   Used Autos Params    Refs
+ ---------------------------------------------------------------------------------
+ (0) _main                                                 1     1      0     480
+                                             15 COMRAM     1     1      0
+                   _envia_serial_pic
+              _envia_serial_terminal
+                             _portas
+                  _recebe_serial_pic
+             _recebe_serial_terminal
+ ---------------------------------------------------------------------------------
+ (1) _recebe_serial_terminal                              15    15      0     165
+                                              0 COMRAM    15    15      0
+ ---------------------------------------------------------------------------------
+ (1) _recebe_serial_pic                                   15    15      0     165
+                                              0 COMRAM    15    15      0
+ ---------------------------------------------------------------------------------
+ (1) _portas                                               0     0      0       0
+ ---------------------------------------------------------------------------------
+ (1) _envia_serial_terminal                                3     3      0      60
+                                              0 COMRAM     3     3      0
+ ---------------------------------------------------------------------------------
+ (1) _envia_serial_pic                                     3     3      0      60
+                                              0 COMRAM     3     3      0
+ ---------------------------------------------------------------------------------
+ Estimated maximum stack depth 1
+ ---------------------------------------------------------------------------------
+
+ Call Graph Graphs:
+
+ _main (ROOT)
+   _envia_serial_pic
+   _envia_serial_terminal
+   _portas
+   _recebe_serial_pic
+   _recebe_serial_terminal
+
+ Address spaces:
+Name               Size   Autos  Total    Cost      Usage
+BITCOMRAM           5F      0       0       0        0.0%
+EEDATA             100      0       0       0        0.0%
+NULL                 0      0       0       0        0.0%
+CODE                 0      0       0       0        0.0%
+COMRAM              5F     10      10       1       16.8%
+STACK                0      0       0       2        0.0%
+DATA                 0      0       0       3        0.0%
+BITBANK0            A0      0       0       4        0.0%
+BANK0               A0      0       0       5        0.0%
+BITBANK1           100      0       0       6        0.0%
+BANK1              100      0       0       7        0.0%
+BITBANK2           100      0       0       8        0.0%
+BANK2              100      0       0       9        0.0%
+BITBANK3           100      0       0      10        0.0%
+BANK3              100      0       0      11        0.0%
+BITBANK4           100      0       0      12        0.0%
+BANK4              100      0       0      13        0.0%
+BITBANK5           100      0       0      14        0.0%
+BANK5              100      0       0      15        0.0%
+BITBANK6           100      0       0      16        0.0%
+BANK6              100      0       0      17        0.0%
+BITBANK7           100      0       0      18        0.0%
+BANK7              100      0       0      19        0.0%
+ABS                  0      0       0      20        0.0%
+BIGRAM             7FF      0       0      21        0.0%
+BITSFR               0      0       0     200        0.0%
+SFR                  0      0       0     200        0.0%
+
+
+Microchip Technology PIC18 Macro Assembler V2.05 build -831301201 
+Symbol Table                                                                                   Mon Apr 08 14:24:19 2019
+
+                             l44 7E84                               l39 7E26  
+                             u10 7F9C                               u20 7FC8  
+                             u30 7FFC                               u16 7F9E  
+                             u50 7E54                               u60 7EFC  
+                             u45 7E2E                               u46 7E30  
+                             u70 7F28                               u80 7F5C  
+                             u66 7EFE                               u95 7E8C  
+                             u96 7E8E           envia_serial_terminal@i 0001  
+                            l833 7F30                              l817 7EE8  
+                            l775 7FD0                              l759 7F88  
+                            l871 7DE2                              l879 7DF2  
+                            u100 7EB2                              u207 7E74  
+                            u217 7E96                              u137 7F6E  
+                            u227 7EB6                              u147 7F78  
+                            u237 7E0A                              u157 7FA8  
+                            u247 7E16                              u167 7ECE  
+                            u257 7E38                              u177 7ED8  
+                            u267 7E58                              u187 7F08  
+                            u197 7E68                              wreg 000FE8  
+__size_of_recebe_serial_terminal 00A0                             _main 7DDA  
+                           indf2 000FDF                             fsr2l 000FD9  
+                           start 0000        __size_of_envia_serial_pic 005E  
+              _recebe_serial_pic 7EC0       recebe_serial_pic@invertido 0001  
+                   ___param_bank 000000               ?_recebe_serial_pic 0001  
+                          ?_main 0001              ??_recebe_serial_pic 0001  
+ __size_of_envia_serial_terminal 005E    __end_of_envia_serial_terminal 7EC0  
+                          status 000FD8        __end_of_recebe_serial_pic 7F60  
+        recebe_serial_terminal@i 000B          recebe_serial_terminal@j 0009  
+        recebe_serial_terminal@x 000D                  __initialization 7DC6  
+                   __end_of_main 7E04           _recebe_serial_terminal 7F60  
+                         ??_main 0010                    __activetblptr 000000  
+                         _ADCON1 000FC1                           _portas 7DCC  
+                     __accesstop 0060          __end_of__initialization 7DC6  
+          recebe_serial_pic@dado 000F       __size_of_recebe_serial_pic 00A0  
+                  ___rparam_used 000001                 _envia_serial_pic 7E04  
+                 __pcstackCOMRAM 0001  recebe_serial_terminal@invertido 0001  
+                        ?_portas 0001                envia_serial_pic@i 0001  
+                        __Hparam 0000          ?_recebe_serial_terminal 0001  
+                        __Lparam 0000                          __pcinit 7DC6  
+                        __ramtop 0800                          __ptext0 7DDA  
+                        __ptext1 7F60                          __ptext2 7EC0  
+                        __ptext3 7DCC                          __ptext4 7E62  
+                        __ptext5 7E04                  __size_of_portas 000E  
+          _envia_serial_terminal 7E62             end_of_initialization 7DC6  
+ __end_of_recebe_serial_terminal 8000                        _PORTAbits 000F80  
+                      _PORTCbits 000F82         __end_of_envia_serial_pic 7E62  
+                      _TRISAbits 000F92                        _TRISCbits 000F94  
+                 __end_of_portas 7DDA              start_initialization 7DC6  
+         ?_envia_serial_terminal 0001                         ??_portas 0001  
+                       _LATAbits 000F89                         _LATCbits 000F8B  
+      envia_serial_terminal@dado 0003                ?_envia_serial_pic 0001  
+             ??_envia_serial_pic 0001                         __Hrparam 0000  
+                       __Lrparam 0000       recebe_serial_terminal@dado 000F  
+        ??_envia_serial_terminal 0001                    __size_of_main 002A  
+                       main@dado 0010               recebe_serial_pic@i 000B  
+             recebe_serial_pic@j 0009               recebe_serial_pic@x 000D  
+       ??_recebe_serial_terminal 0001             envia_serial_pic@dado 0003  

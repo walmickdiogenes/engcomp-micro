@@ -1,0 +1,1284 @@
+
+
+Microchip MPLAB XC8 Assembler V2.05 build -831301201 
+                                                                                               Mon Apr 08 14:46:31 2019
+
+Microchip MPLAB XC8 C Compiler v2.05 (Free license) build 20181220022703 Og1 
+     1                           	processor	18F4550
+     2                           	fnconf	rparam,??,?,0
+     3                           	opt	pw 120
+     4                           	opt	flic
+     5                           	psect	cinit,global,reloc=2,class=CODE,delta=1
+     6                           	psect	cstackCOMRAM,global,class=COMRAM,space=1,delta=1,noexec
+     7                           	psect	text0,global,reloc=2,class=CODE,delta=1
+     8                           	psect	text1,global,reloc=2,class=CODE,delta=1
+     9                           	psect	text2,global,reloc=2,class=CODE,delta=1
+    10                           	psect	text3,global,reloc=2,class=CODE,delta=1
+    11                           	psect	text4,global,reloc=2,class=CODE,delta=1
+    12                           	psect	text5,global,reloc=2,class=CODE,delta=1
+    13                           	psect	text6,global,reloc=2,class=CODE,delta=1
+    14                           	psect	intsave_regs,global,class=BIGRAM,space=1,delta=1,noexec
+    15                           	psect	rparam,global,class=COMRAM,space=1,delta=1,noexec
+    16  0000                     
+    17                           ; Version 2.05
+    18                           ; Generated 20/12/2018 GMT
+    19                           ; 
+    20                           ; Copyright © 2018, Microchip Technology Inc. and its subsidiaries ("Microchip")
+    21                           ; All rights reserved.
+    22                           ; 
+    23                           ; This software is developed by Microchip Technology Inc. and its subsidiaries ("Microch
+      +                          ip").
+    24                           ; 
+    25                           ; Redistribution and use in source and binary forms, with or without modification, are
+    26                           ; permitted provided that the following conditions are met:
+    27                           ; 
+    28                           ;     1. Redistributions of source code must retain the above copyright notice, this lis
+      +                          t of
+    29                           ;        conditions and the following disclaimer.
+    30                           ; 
+    31                           ;     2. Redistributions in binary form must reproduce the above copyright notice, this 
+      +                          list
+    32                           ;        of conditions and the following disclaimer in the documentation and/or other
+    33                           ;        materials provided with the distribution.
+    34                           ; 
+    35                           ;     3. Microchip's name may not be used to endorse or promote products derived from th
+      +                          is
+    36                           ;        software without specific prior written permission.
+    37                           ; 
+    38                           ; THIS SOFTWARE IS PROVIDED BY MICROCHIP "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES,
+    39                           ; INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS F
+      +                          OR
+    40                           ; PURPOSE ARE DISCLAIMED.  IN NO EVENT SHALL MICROCHIP BE LIABLE FOR ANY DIRECT, INDIREC
+      +                          T,
+    41                           ; INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING BUT NOT LIMITED TO
+    42                           ; PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA OR PROFITS; OR BUSINESS
+    43                           ; INTERRUPTION) HOWSOEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, ST
+      +                          RICT
+    44                           ; LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE U
+      +                          SE OF
+    45                           ; THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+    46                           ; 
+    47                           ; 
+    48                           ; Code-generator required, PIC18F4550 Definitions
+    49                           ; 
+    50                           ; SFR Addresses
+    51  0000                     _PORTBbits	set	3969
+    52  0000                     _LATBbits	set	3978
+    53  0000                     _LATD	set	3980
+    54  0000                     _LATCbits	set	3979
+    55  0000                     _TRISBbits	set	3987
+    56  0000                     _TRISCbits	set	3988
+    57  0000                     _TRISD	set	3989
+    58  0000                     _ADCON1	set	4033
+    59  0000                     _PORTCbits	set	3970
+    60                           
+    61                           ; #config settings
+    62                           
+    63                           	psect	cinit
+    64  007D5C                     __pcinit:
+    65                           	opt callstack 0
+    66  007D5C                     start_initialization:
+    67                           	opt callstack 0
+    68  007D5C                     __initialization:
+    69                           	opt callstack 0
+    70  007D5C                     end_of_initialization:
+    71                           	opt callstack 0
+    72  007D5C                     __end_of__initialization:
+    73                           	opt callstack 0
+    74  007D5C  0100               	movlb	0
+    75  007D5E  EFD0  F03E         	goto	_main	;jump to C main() function
+    76                           
+    77                           	psect	cstackCOMRAM
+    78  000001                     __pcstackCOMRAM:
+    79                           	opt callstack 0
+    80  000001                     ??_inicializar_display:
+    81  000001                     ??_envia_char_display:
+    82  000001                     envia_char_serial@i:
+    83                           	opt callstack 0
+    84  000001                     recebe_char_serial@invertido:
+    85                           	opt callstack 0
+    86                           
+    87                           ; 8 bytes @ 0x0
+    88  000001                     	ds	1
+    89  000002                     envia_char_display@dado:
+    90                           	opt callstack 0
+    91                           
+    92                           ; 1 bytes @ 0x1
+    93  000002                     	ds	1
+    94  000003                     envia_char_serial@dado:
+    95                           	opt callstack 0
+    96                           
+    97                           ; 1 bytes @ 0x2
+    98  000003                     	ds	6
+    99  000009                     recebe_char_serial@j:
+   100                           	opt callstack 0
+   101                           
+   102                           ; 2 bytes @ 0x8
+   103  000009                     	ds	2
+   104  00000B                     recebe_char_serial@i:
+   105                           	opt callstack 0
+   106                           
+   107                           ; 2 bytes @ 0xA
+   108  00000B                     	ds	2
+   109  00000D                     recebe_char_serial@x:
+   110                           	opt callstack 0
+   111                           
+   112                           ; 2 bytes @ 0xC
+   113  00000D                     	ds	2
+   114  00000F                     recebe_char_serial@dado:
+   115                           	opt callstack 0
+   116                           
+   117                           ; 1 bytes @ 0xE
+   118  00000F                     	ds	1
+   119  000010                     ??_main:
+   120                           
+   121                           ; 1 bytes @ 0xF
+   122  000010                     	ds	1
+   123  000011                     main@x:
+   124                           	opt callstack 0
+   125                           
+   126                           ; 2 bytes @ 0x10
+   127  000011                     	ds	2
+   128  000013                     main@carac:
+   129                           	opt callstack 0
+   130                           
+   131                           ; 1 bytes @ 0x12
+   132  000013                     	ds	1
+   133  000014                     main@dado:
+   134                           	opt callstack 0
+   135                           
+   136                           ; 1 bytes @ 0x13
+   137  000014                     	ds	1
+   138                           
+   139 ;;
+   140 ;;Main: autosize = 0, tempsize = 1, incstack = 0, save=0
+   141 ;;
+   142 ;; *************** function _main *****************
+   143 ;; Defined at:
+   144 ;;		line 20 in file "lcd-teclado.c"
+   145 ;; Parameters:    Size  Location     Type
+   146 ;;		None
+   147 ;; Auto vars:     Size  Location     Type
+   148 ;;  x               2   16[COMRAM] int 
+   149 ;;  dado            1   19[COMRAM] unsigned char 
+   150 ;;  carac           1   18[COMRAM] unsigned char 
+   151 ;; Return value:  Size  Location     Type
+   152 ;;                  1    wreg      void 
+   153 ;; Registers used:
+   154 ;;		wreg, fsr2l, fsr2h, status,2, status,0, cstack
+   155 ;; Tracked objects:
+   156 ;;		On entry : 0/0
+   157 ;;		On exit  : 0/0
+   158 ;;		Unchanged: 0/0
+   159 ;; Data sizes:     COMRAM   BANK0   BANK1   BANK2   BANK3   BANK4   BANK5   BANK6   BANK7
+   160 ;;      Params:         0       0       0       0       0       0       0       0       0
+   161 ;;      Locals:         4       0       0       0       0       0       0       0       0
+   162 ;;      Temps:          1       0       0       0       0       0       0       0       0
+   163 ;;      Totals:         5       0       0       0       0       0       0       0       0
+   164 ;;Total ram usage:        5 bytes
+   165 ;; Hardware stack levels required when called:    1
+   166 ;; This function calls:
+   167 ;;		_Configura_Portas
+   168 ;;		_envia_char_display
+   169 ;;		_envia_char_serial
+   170 ;;		_inicializar_display
+   171 ;;		_recebe_char_serial
+   172 ;;		_varredura_teclado
+   173 ;; This function is called by:
+   174 ;;		Startup code after reset
+   175 ;; This function uses a non-reentrant model
+   176 ;;
+   177                           
+   178                           	psect	text0
+   179  007DA0                     __ptext0:
+   180                           	opt callstack 0
+   181  007DA0                     _main:
+   182                           	opt callstack 30
+   183                           
+   184                           ;lcd-teclado.c: 22:     Configura_Portas();
+   185                           
+   186                           ;incstack = 0
+   187  007DA0  ECC0  F03E         	call	_Configura_Portas	;wreg free
+   188                           
+   189                           ;lcd-teclado.c: 23:     inicializar_display();
+   190  007DA4  EC21  F03F         	call	_inicializar_display	;wreg free
+   191  007DA8                     l1015:
+   192                           
+   193                           ;lcd-teclado.c: 27:     {;lcd-teclado.c: 28:         x = PORTCbits.RC7;
+   194  007DA8  AE82               	btfss	3970,7,c	;volatile
+   195  007DAA  D003               	goto	u300
+   196  007DAC  6A10               	clrf	??_main& (0+255),c
+   197  007DAE  2A10               	incf	??_main& (0+255),f,c
+   198  007DB0  D001               	goto	u308
+   199  007DB2                     u300:
+   200  007DB2  6A10               	clrf	??_main& (0+255),c
+   201  007DB4                     u308:
+   202  007DB4  5010               	movf	??_main,w,c
+   203  007DB6  6E11               	movwf	main@x,c
+   204  007DB8  6A12               	clrf	main@x+1,c
+   205                           
+   206                           ;lcd-teclado.c: 29:         if(x == 0)
+   207  007DBA  5011               	movf	main@x,w,c
+   208  007DBC  1012               	iorwf	main@x+1,w,c
+   209  007DBE  A4D8               	btfss	status,2,c
+   210  007DC0  D006               	goto	l1023
+   211                           
+   212                           ;lcd-teclado.c: 30:       {;lcd-teclado.c: 31:             carac = recebe_char_serial();
+   213  007DC2  EC5A  F03F         	call	_recebe_char_serial	;wreg free
+   214  007DC6  6E13               	movwf	main@carac,c
+   215                           
+   216                           ;lcd-teclado.c: 32:             envia_char_display(carac);
+   217  007DC8  5013               	movf	main@carac,w,c
+   218  007DCA  ECB1  F03E         	call	_envia_char_display
+   219  007DCE                     l1023:
+   220                           
+   221                           ;lcd-teclado.c: 34:         dado = varredura_teclado();
+   222  007DCE  ECAA  F03F         	call	_varredura_teclado	;wreg free
+   223  007DD2  6E14               	movwf	main@dado,c
+   224                           
+   225                           ;lcd-teclado.c: 35:         if(dado != 'x')
+   226  007DD4  0E78               	movlw	120
+   227  007DD6  1814               	xorwf	main@dado,w,c
+   228  007DD8  B4D8               	btfsc	status,2,c
+   229  007DDA  D7E6               	goto	l1015
+   230                           
+   231                           ;lcd-teclado.c: 36:         {;lcd-teclado.c: 37:         envia_char_serial(dado);
+   232  007DDC  5014               	movf	main@dado,w,c
+   233  007DDE  ECF2  F03E         	call	_envia_char_serial
+   234  007DE2  D7E2               	goto	l1015
+   235  007DE4                     __end_of_main:
+   236                           	opt callstack 0
+   237                           
+   238 ;; *************** function _varredura_teclado *****************
+   239 ;; Defined at:
+   240 ;;		line 125 in file "lcd-teclado.c"
+   241 ;; Parameters:    Size  Location     Type
+   242 ;;		None
+   243 ;; Auto vars:     Size  Location     Type
+   244 ;;		None
+   245 ;; Return value:  Size  Location     Type
+   246 ;;                  1    wreg      unsigned char 
+   247 ;; Registers used:
+   248 ;;		wreg
+   249 ;; Tracked objects:
+   250 ;;		On entry : 0/0
+   251 ;;		On exit  : 0/0
+   252 ;;		Unchanged: 0/0
+   253 ;; Data sizes:     COMRAM   BANK0   BANK1   BANK2   BANK3   BANK4   BANK5   BANK6   BANK7
+   254 ;;      Params:         0       0       0       0       0       0       0       0       0
+   255 ;;      Locals:         0       0       0       0       0       0       0       0       0
+   256 ;;      Temps:          0       0       0       0       0       0       0       0       0
+   257 ;;      Totals:         0       0       0       0       0       0       0       0       0
+   258 ;;Total ram usage:        0 bytes
+   259 ;; Hardware stack levels used:    1
+   260 ;; This function calls:
+   261 ;;		Nothing
+   262 ;; This function is called by:
+   263 ;;		_main
+   264 ;; This function uses a non-reentrant model
+   265 ;;
+   266                           
+   267                           	psect	text1
+   268  007F54                     __ptext1:
+   269                           	opt callstack 0
+   270  007F54                     _varredura_teclado:
+   271                           	opt callstack 30
+   272                           
+   273                           ;lcd-teclado.c: 127:     LATBbits.LATB0 = 1;
+   274                           
+   275                           ;incstack = 0
+   276  007F54  808A               	bsf	3978,0,c	;volatile
+   277                           
+   278                           ;lcd-teclado.c: 128:     LATBbits.LATB1 = 0;
+   279  007F56  928A               	bcf	3978,1,c	;volatile
+   280                           
+   281                           ;lcd-teclado.c: 129:     LATBbits.LATB2 = 0;
+   282  007F58  948A               	bcf	3978,2,c	;volatile
+   283                           
+   284                           ;lcd-teclado.c: 130:     if(PORTBbits.RB3 == 1)
+   285  007F5A  A681               	btfss	3969,3,c	;volatile
+   286  007F5C  D004               	goto	l66
+   287  007F5E                     u40:
+   288                           
+   289                           ;lcd-teclado.c: 132:         while(PORTBbits.RB3 == 1)
+   290                           
+   291                           ;lcd-teclado.c: 133:         {;lcd-teclado.c: 134:         }
+   292  007F5E  B681               	btfsc	3969,3,c	;volatile
+   293  007F60  D7FE               	goto	u40
+   294                           
+   295                           ;lcd-teclado.c: 135:         return '1';
+   296  007F62  0E31               	movlw	49
+   297  007F64  0012               	return	
+   298  007F66                     l66:
+   299  007F66  A881               	btfss	3969,4,c	;volatile
+   300  007F68  D004               	goto	l72
+   301  007F6A                     u60:
+   302                           
+   303                           ;lcd-teclado.c: 139:         while(PORTBbits.RB4 == 1)
+   304                           
+   305                           ;lcd-teclado.c: 140:         {;lcd-teclado.c: 141:         }
+   306  007F6A  B881               	btfsc	3969,4,c	;volatile
+   307  007F6C  D7FE               	goto	u60
+   308                           
+   309                           ;lcd-teclado.c: 142:         return '4';
+   310  007F6E  0E34               	movlw	52
+   311  007F70  0012               	return	
+   312  007F72                     l72:
+   313  007F72  AA81               	btfss	3969,5,c	;volatile
+   314  007F74  D004               	goto	l77
+   315  007F76                     u80:
+   316                           
+   317                           ;lcd-teclado.c: 146:         while(PORTBbits.RB5 == 1)
+   318                           
+   319                           ;lcd-teclado.c: 147:         {;lcd-teclado.c: 148:         }
+   320  007F76  BA81               	btfsc	3969,5,c	;volatile
+   321  007F78  D7FE               	goto	u80
+   322                           
+   323                           ;lcd-teclado.c: 149:         return '7';
+   324  007F7A  0E37               	movlw	55
+   325  007F7C  0012               	return	
+   326  007F7E                     l77:
+   327  007F7E  AC81               	btfss	3969,6,c	;volatile
+   328  007F80  D004               	goto	l71
+   329  007F82                     u100:
+   330                           
+   331                           ;lcd-teclado.c: 153:         while(PORTBbits.RB6 == 1)
+   332                           
+   333                           ;lcd-teclado.c: 154:         {;lcd-teclado.c: 155:         }
+   334  007F82  BC81               	btfsc	3969,6,c	;volatile
+   335  007F84  D7FE               	goto	u100
+   336                           
+   337                           ;lcd-teclado.c: 156:         return '*';
+   338  007F86  0E2A               	movlw	42
+   339  007F88  0012               	return	
+   340  007F8A                     l71:
+   341                           
+   342                           ;lcd-teclado.c: 158:     LATBbits.LATB0 = 0;
+   343  007F8A  908A               	bcf	3978,0,c	;volatile
+   344                           
+   345                           ;lcd-teclado.c: 159:     LATBbits.LATB1 = 1;
+   346  007F8C  828A               	bsf	3978,1,c	;volatile
+   347                           
+   348                           ;lcd-teclado.c: 160:     LATBbits.LATB2 = 0;
+   349  007F8E  948A               	bcf	3978,2,c	;volatile
+   350                           
+   351                           ;lcd-teclado.c: 161:     if(PORTBbits.RB3 == 1)
+   352  007F90  A681               	btfss	3969,3,c	;volatile
+   353  007F92  D004               	goto	l86
+   354  007F94                     u120:
+   355                           
+   356                           ;lcd-teclado.c: 163:         while(PORTBbits.RB3 == 1)
+   357                           
+   358                           ;lcd-teclado.c: 164:         {;lcd-teclado.c: 165:         }
+   359  007F94  B681               	btfsc	3969,3,c	;volatile
+   360  007F96  D7FE               	goto	u120
+   361                           
+   362                           ;lcd-teclado.c: 166:         return '2';
+   363  007F98  0E32               	movlw	50
+   364  007F9A  0012               	return	
+   365  007F9C                     l86:
+   366  007F9C  A881               	btfss	3969,4,c	;volatile
+   367  007F9E  D004               	goto	l91
+   368  007FA0                     u140:
+   369                           
+   370                           ;lcd-teclado.c: 170:         while(PORTBbits.RB4 == 1)
+   371                           
+   372                           ;lcd-teclado.c: 171:         {;lcd-teclado.c: 172:         }
+   373  007FA0  B881               	btfsc	3969,4,c	;volatile
+   374  007FA2  D7FE               	goto	u140
+   375                           
+   376                           ;lcd-teclado.c: 173:         return '5';
+   377  007FA4  0E35               	movlw	53
+   378  007FA6  0012               	return	
+   379  007FA8                     l91:
+   380  007FA8  AA81               	btfss	3969,5,c	;volatile
+   381  007FAA  D004               	goto	l96
+   382  007FAC                     u160:
+   383                           
+   384                           ;lcd-teclado.c: 177:         while(PORTBbits.RB5 == 1)
+   385                           
+   386                           ;lcd-teclado.c: 178:         {;lcd-teclado.c: 179:         }
+   387  007FAC  BA81               	btfsc	3969,5,c	;volatile
+   388  007FAE  D7FE               	goto	u160
+   389                           
+   390                           ;lcd-teclado.c: 180:         return '8';
+   391  007FB0  0E38               	movlw	56
+   392  007FB2  0012               	return	
+   393  007FB4                     l96:
+   394  007FB4  AC81               	btfss	3969,6,c	;volatile
+   395  007FB6  D004               	goto	l90
+   396  007FB8                     u180:
+   397                           
+   398                           ;lcd-teclado.c: 184:         while(PORTBbits.RB6 == 1)
+   399                           
+   400                           ;lcd-teclado.c: 185:         {;lcd-teclado.c: 186:         }
+   401  007FB8  BC81               	btfsc	3969,6,c	;volatile
+   402  007FBA  D7FE               	goto	u180
+   403                           
+   404                           ;lcd-teclado.c: 187:         return '0';
+   405  007FBC  0E30               	movlw	48
+   406  007FBE  0012               	return	
+   407  007FC0                     l90:
+   408                           
+   409                           ;lcd-teclado.c: 189:     LATBbits.LATB0 = 0;
+   410  007FC0  908A               	bcf	3978,0,c	;volatile
+   411                           
+   412                           ;lcd-teclado.c: 190:     LATBbits.LATB1 = 0;
+   413  007FC2  928A               	bcf	3978,1,c	;volatile
+   414                           
+   415                           ;lcd-teclado.c: 191:     LATBbits.LATB2 = 1;
+   416  007FC4  848A               	bsf	3978,2,c	;volatile
+   417                           
+   418                           ;lcd-teclado.c: 192:     if(PORTBbits.RB3 == 1)
+   419  007FC6  A681               	btfss	3969,3,c	;volatile
+   420  007FC8  D004               	goto	l105
+   421  007FCA                     u200:
+   422                           
+   423                           ;lcd-teclado.c: 194:         while(PORTBbits.RB3 == 1)
+   424                           
+   425                           ;lcd-teclado.c: 195:         {;lcd-teclado.c: 196:         }
+   426  007FCA  B681               	btfsc	3969,3,c	;volatile
+   427  007FCC  D7FE               	goto	u200
+   428                           
+   429                           ;lcd-teclado.c: 197:         return '3';
+   430  007FCE  0E33               	movlw	51
+   431  007FD0  0012               	return	
+   432  007FD2                     l105:
+   433  007FD2  A881               	btfss	3969,4,c	;volatile
+   434  007FD4  D004               	goto	l110
+   435  007FD6                     u220:
+   436                           
+   437                           ;lcd-teclado.c: 201:         while(PORTBbits.RB4 == 1)
+   438                           
+   439                           ;lcd-teclado.c: 202:         {;lcd-teclado.c: 203:         }
+   440  007FD6  B881               	btfsc	3969,4,c	;volatile
+   441  007FD8  D7FE               	goto	u220
+   442                           
+   443                           ;lcd-teclado.c: 204:         return '6';
+   444  007FDA  0E36               	movlw	54
+   445  007FDC  0012               	return	
+   446  007FDE                     l110:
+   447  007FDE  AA81               	btfss	3969,5,c	;volatile
+   448  007FE0  D004               	goto	l115
+   449  007FE2                     u240:
+   450                           
+   451                           ;lcd-teclado.c: 208:         while(PORTBbits.RB5 == 1)
+   452                           
+   453                           ;lcd-teclado.c: 209:         {;lcd-teclado.c: 210:         }
+   454  007FE2  BA81               	btfsc	3969,5,c	;volatile
+   455  007FE4  D7FE               	goto	u240
+   456                           
+   457                           ;lcd-teclado.c: 211:         return '9';
+   458  007FE6  0E39               	movlw	57
+   459  007FE8  0012               	return	
+   460  007FEA                     l115:
+   461  007FEA  AC81               	btfss	3969,6,c	;volatile
+   462  007FEC  D004               	goto	l109
+   463  007FEE                     u260:
+   464                           
+   465                           ;lcd-teclado.c: 215:         while(PORTBbits.RB6 == 1)
+   466                           
+   467                           ;lcd-teclado.c: 216:         {;lcd-teclado.c: 217:         }
+   468  007FEE  BC81               	btfsc	3969,6,c	;volatile
+   469  007FF0  D7FE               	goto	u260
+   470                           
+   471                           ;lcd-teclado.c: 218:         return '#';
+   472  007FF2  0E23               	movlw	35
+   473  007FF4  0012               	return	
+   474  007FF6                     l109:
+   475                           
+   476                           ;lcd-teclado.c: 220:     LATBbits.LATB0 = 0;
+   477  007FF6  908A               	bcf	3978,0,c	;volatile
+   478                           
+   479                           ;lcd-teclado.c: 221:     LATBbits.LATB1 = 0;
+   480  007FF8  928A               	bcf	3978,1,c	;volatile
+   481                           
+   482                           ;lcd-teclado.c: 222:     LATBbits.LATB2 = 0;
+   483  007FFA  948A               	bcf	3978,2,c	;volatile
+   484                           
+   485                           ;lcd-teclado.c: 223:     return 'x';
+   486  007FFC  0E78               	movlw	120
+   487  007FFE  0012               	return		;funcret
+   488  008000                     __end_of_varredura_teclado:
+   489                           	opt callstack 0
+   490                           
+   491 ;; *************** function _recebe_char_serial *****************
+   492 ;; Defined at:
+   493 ;;		line 103 in file "lcd-teclado.c"
+   494 ;; Parameters:    Size  Location     Type
+   495 ;;		None
+   496 ;; Auto vars:     Size  Location     Type
+   497 ;;  invertido       8    0[COMRAM] unsigned char [8]
+   498 ;;  x               2   12[COMRAM] int 
+   499 ;;  i               2   10[COMRAM] int 
+   500 ;;  j               2    8[COMRAM] int 
+   501 ;;  c               2    0        int 
+   502 ;;  dado            1   14[COMRAM] unsigned char 
+   503 ;; Return value:  Size  Location     Type
+   504 ;;                  1    wreg      unsigned char 
+   505 ;; Registers used:
+   506 ;;		wreg, fsr2l, fsr2h, status,2, status,0
+   507 ;; Tracked objects:
+   508 ;;		On entry : 0/0
+   509 ;;		On exit  : 0/0
+   510 ;;		Unchanged: 0/0
+   511 ;; Data sizes:     COMRAM   BANK0   BANK1   BANK2   BANK3   BANK4   BANK5   BANK6   BANK7
+   512 ;;      Params:         0       0       0       0       0       0       0       0       0
+   513 ;;      Locals:        15       0       0       0       0       0       0       0       0
+   514 ;;      Temps:          0       0       0       0       0       0       0       0       0
+   515 ;;      Totals:        15       0       0       0       0       0       0       0       0
+   516 ;;Total ram usage:       15 bytes
+   517 ;; Hardware stack levels used:    1
+   518 ;; This function calls:
+   519 ;;		Nothing
+   520 ;; This function is called by:
+   521 ;;		_main
+   522 ;; This function uses a non-reentrant model
+   523 ;;
+   524                           
+   525                           	psect	text2
+   526  007EB4                     __ptext2:
+   527                           	opt callstack 0
+   528  007EB4                     _recebe_char_serial:
+   529                           	opt callstack 30
+   530                           
+   531                           ;lcd-teclado.c: 105:  int i,x,c;;lcd-teclado.c: 106:     int j = 7;
+   532                           
+   533                           ;incstack = 0
+   534  007EB4  0E00               	movlw	0
+   535  007EB6  6E0A               	movwf	recebe_char_serial@j+1,c
+   536  007EB8  0E07               	movlw	7
+   537  007EBA  6E09               	movwf	recebe_char_serial@j,c
+   538                           
+   539                           ;lcd-teclado.c: 107:     char invertido[8];;lcd-teclado.c: 108:     char dado=0;
+   540  007EBC  0E00               	movlw	0
+   541  007EBE  6E0F               	movwf	recebe_char_serial@dado,c
+   542                           
+   543                           ;lcd-teclado.c: 110:     _delay((unsigned long)((416)*(8000000/4000000.0)));
+   544  007EC0  0EA6               	movlw	166
+   545  007EC2                     u337:
+   546  007EC2  D000               	nop2	
+   547  007EC4  2EE8               	decfsz	wreg,f,c
+   548  007EC6  D7FD               	bra	u337
+   549  007EC8  D000               	nop2	
+   550                           
+   551                           ;lcd-teclado.c: 111:     _delay((unsigned long)((833)*(8000000/4000000.0)));
+   552  007ECA  0EEE               	movlw	238
+   553  007ECC                     u347:
+   554  007ECC  D000               	nop2	
+   555  007ECE  D000               	nop2	
+   556  007ED0  2EE8               	decfsz	wreg,f,c
+   557  007ED2  D7FC               	bra	u347
+   558                           
+   559                           ;lcd-teclado.c: 112:     for(i=0;i<8;i++)
+   560  007ED4  0E00               	movlw	0
+   561  007ED6  6E0C               	movwf	recebe_char_serial@i+1,c
+   562  007ED8  0E00               	movlw	0
+   563  007EDA  6E0B               	movwf	recebe_char_serial@i,c
+   564  007EDC                     l859:
+   565                           
+   566                           ;lcd-teclado.c: 113:     {;lcd-teclado.c: 114:         invertido[j]=PORTCbits.RC7;
+   567  007EDC  0E01               	movlw	low recebe_char_serial@invertido
+   568  007EDE  2409               	addwf	recebe_char_serial@j,w,c
+   569  007EE0  6ED9               	movwf	fsr2l,c
+   570  007EE2  0E00               	movlw	high recebe_char_serial@invertido
+   571  007EE4  200A               	addwfc	recebe_char_serial@j+1,w,c
+   572  007EE6  6EDA               	movwf	fsr2h,c
+   573  007EE8  AE82               	btfss	3970,7,c	;volatile
+   574  007EEA  D002               	goto	u10
+   575  007EEC  0E01               	movlw	1
+   576  007EEE  D001               	goto	u16
+   577  007EF0                     u10:
+   578  007EF0  0E00               	movlw	0
+   579  007EF2                     u16:
+   580  007EF2  6EDF               	movwf	indf2,c
+   581                           
+   582                           ;lcd-teclado.c: 115:         j--;
+   583  007EF4  0609               	decf	recebe_char_serial@j,f,c
+   584  007EF6  A0D8               	btfss	status,0,c
+   585  007EF8  060A               	decf	recebe_char_serial@j+1,f,c
+   586                           
+   587                           ;lcd-teclado.c: 116:         _delay((unsigned long)((810)*(8000000/4000000.0)));
+   588  007EFA  0EE7               	movlw	231
+   589  007EFC                     u357:
+   590  007EFC  D000               	nop2	
+   591  007EFE  D000               	nop2	
+   592  007F00  2EE8               	decfsz	wreg,f,c
+   593  007F02  D7FC               	bra	u357
+   594  007F04  D000               	nop2	
+   595  007F06  F000               	nop	
+   596                           
+   597                           ;lcd-teclado.c: 117:     }
+   598  007F08  4A0B               	infsnz	recebe_char_serial@i,f,c
+   599  007F0A  2A0C               	incf	recebe_char_serial@i+1,f,c
+   600  007F0C  BE0C               	btfsc	recebe_char_serial@i+1,7,c
+   601  007F0E  D7E6               	goto	l859
+   602  007F10  500C               	movf	recebe_char_serial@i+1,w,c
+   603  007F12  E104               	bnz	u20
+   604  007F14  0E08               	movlw	8
+   605  007F16  5C0B               	subwf	recebe_char_serial@i,w,c
+   606  007F18  A0D8               	btfss	status,0,c
+   607  007F1A  D7E0               	goto	l859
+   608  007F1C                     u20:
+   609                           
+   610                           ;lcd-teclado.c: 118:     for(x=0;x<8;x++)
+   611  007F1C  0E00               	movlw	0
+   612  007F1E  6E0E               	movwf	recebe_char_serial@x+1,c
+   613  007F20  0E00               	movlw	0
+   614  007F22  6E0D               	movwf	recebe_char_serial@x,c
+   615  007F24                     l875:
+   616                           
+   617                           ;lcd-teclado.c: 119:     {;lcd-teclado.c: 120:         dado = dado <<1;
+   618  007F24  500F               	movf	recebe_char_serial@dado,w,c
+   619  007F26  240F               	addwf	recebe_char_serial@dado,w,c
+   620  007F28  6E0F               	movwf	recebe_char_serial@dado,c
+   621                           
+   622                           ;lcd-teclado.c: 121:         dado = dado + invertido[x];
+   623  007F2A  0E01               	movlw	low recebe_char_serial@invertido
+   624  007F2C  240D               	addwf	recebe_char_serial@x,w,c
+   625  007F2E  6ED9               	movwf	fsr2l,c
+   626  007F30  0E00               	movlw	high recebe_char_serial@invertido
+   627  007F32  200E               	addwfc	recebe_char_serial@x+1,w,c
+   628  007F34  6EDA               	movwf	fsr2h,c
+   629  007F36  50DF               	movf	indf2,w,c
+   630  007F38  240F               	addwf	recebe_char_serial@dado,w,c
+   631  007F3A  6E0F               	movwf	recebe_char_serial@dado,c
+   632                           
+   633                           ;lcd-teclado.c: 122:     }
+   634  007F3C  4A0D               	infsnz	recebe_char_serial@x,f,c
+   635  007F3E  2A0E               	incf	recebe_char_serial@x+1,f,c
+   636  007F40  BE0E               	btfsc	recebe_char_serial@x+1,7,c
+   637  007F42  D7F0               	goto	l875
+   638  007F44  500E               	movf	recebe_char_serial@x+1,w,c
+   639  007F46  E104               	bnz	u30
+   640  007F48  0E08               	movlw	8
+   641  007F4A  5C0D               	subwf	recebe_char_serial@x,w,c
+   642  007F4C  A0D8               	btfss	status,0,c
+   643  007F4E  D7EA               	goto	l875
+   644  007F50                     u30:
+   645                           
+   646                           ;lcd-teclado.c: 123:     return dado;
+   647  007F50  500F               	movf	recebe_char_serial@dado,w,c
+   648  007F52  0012               	return		;funcret
+   649  007F54                     __end_of_recebe_char_serial:
+   650                           	opt callstack 0
+   651                           
+   652 ;; *************** function _inicializar_display *****************
+   653 ;; Defined at:
+   654 ;;		line 58 in file "lcd-teclado.c"
+   655 ;; Parameters:    Size  Location     Type
+   656 ;;		None
+   657 ;; Auto vars:     Size  Location     Type
+   658 ;;		None
+   659 ;; Return value:  Size  Location     Type
+   660 ;;                  1    wreg      void 
+   661 ;; Registers used:
+   662 ;;		wreg, status,2
+   663 ;; Tracked objects:
+   664 ;;		On entry : 0/0
+   665 ;;		On exit  : 0/0
+   666 ;;		Unchanged: 0/0
+   667 ;; Data sizes:     COMRAM   BANK0   BANK1   BANK2   BANK3   BANK4   BANK5   BANK6   BANK7
+   668 ;;      Params:         0       0       0       0       0       0       0       0       0
+   669 ;;      Locals:         0       0       0       0       0       0       0       0       0
+   670 ;;      Temps:          2       0       0       0       0       0       0       0       0
+   671 ;;      Totals:         2       0       0       0       0       0       0       0       0
+   672 ;;Total ram usage:        2 bytes
+   673 ;; Hardware stack levels used:    1
+   674 ;; This function calls:
+   675 ;;		Nothing
+   676 ;; This function is called by:
+   677 ;;		_main
+   678 ;; This function uses a non-reentrant model
+   679 ;;
+   680                           
+   681                           	psect	text3
+   682  007E42                     __ptext3:
+   683                           	opt callstack 0
+   684  007E42                     _inicializar_display:
+   685                           	opt callstack 30
+   686                           
+   687                           ;lcd-teclado.c: 60:     _delay((unsigned long)((1000)*(8000000/4000.0)));
+   688                           
+   689                           ;incstack = 0
+   690  007E42  0E0B               	movlw	11
+   691  007E44  6E02               	movwf	(??_inicializar_display+1)& (0+255),c
+   692  007E46  0E26               	movlw	38
+   693  007E48  6E01               	movwf	??_inicializar_display& (0+255),c
+   694  007E4A  0E5E               	movlw	94
+   695  007E4C                     u367:
+   696  007E4C  2EE8               	decfsz	wreg,f,c
+   697  007E4E  D7FE               	bra	u367
+   698  007E50  2E01               	decfsz	??_inicializar_display& (0+255),f,c
+   699  007E52  D7FC               	bra	u367
+   700  007E54  2E02               	decfsz	(??_inicializar_display+1)& (0+255),f,c
+   701  007E56  D7FA               	bra	u367
+   702                           
+   703                           ;lcd-teclado.c: 61:    LATCbits.LATC1 = 0;
+   704  007E58  928B               	bcf	3979,1,c	;volatile
+   705                           
+   706                           ;lcd-teclado.c: 62:    LATCbits.LATC0 = 0;
+   707  007E5A  908B               	bcf	3979,0,c	;volatile
+   708                           
+   709                           ;lcd-teclado.c: 64:    LATD = 0b00110000;
+   710  007E5C  0E30               	movlw	48
+   711  007E5E  6E8C               	movwf	3980,c	;volatile
+   712                           
+   713                           ;lcd-teclado.c: 65:    LATCbits.LATC1 = 1;
+   714  007E60  828B               	bsf	3979,1,c	;volatile
+   715                           
+   716                           ;lcd-teclado.c: 66:    LATCbits.LATC1 = 0;
+   717  007E62  928B               	bcf	3979,1,c	;volatile
+   718                           
+   719                           ;lcd-teclado.c: 67:    _delay((unsigned long)((100)*(8000000/4000.0)));
+   720  007E64  0E02               	movlw	2
+   721  007E66  6E02               	movwf	(??_inicializar_display+1)& (0+255),c
+   722  007E68  0E04               	movlw	4
+   723  007E6A  6E01               	movwf	??_inicializar_display& (0+255),c
+   724  007E6C  0EBA               	movlw	186
+   725  007E6E                     u377:
+   726  007E6E  2EE8               	decfsz	wreg,f,c
+   727  007E70  D7FE               	bra	u377
+   728  007E72  2E01               	decfsz	??_inicializar_display& (0+255),f,c
+   729  007E74  D7FC               	bra	u377
+   730  007E76  2E02               	decfsz	(??_inicializar_display+1)& (0+255),f,c
+   731  007E78  D7FA               	bra	u377
+   732  007E7A  D000               	nop2	
+   733                           
+   734                           ;lcd-teclado.c: 69:    LATD = 0b00001110;
+   735  007E7C  0E0E               	movlw	14
+   736  007E7E  6E8C               	movwf	3980,c	;volatile
+   737                           
+   738                           ;lcd-teclado.c: 70:    LATCbits.LATC1 = 1;
+   739  007E80  828B               	bsf	3979,1,c	;volatile
+   740                           
+   741                           ;lcd-teclado.c: 71:    LATCbits.LATC1 = 0;
+   742  007E82  928B               	bcf	3979,1,c	;volatile
+   743                           
+   744                           ;lcd-teclado.c: 72:    _delay((unsigned long)((100)*(8000000/4000.0)));
+   745  007E84  0E02               	movlw	2
+   746  007E86  6E02               	movwf	(??_inicializar_display+1)& (0+255),c
+   747  007E88  0E04               	movlw	4
+   748  007E8A  6E01               	movwf	??_inicializar_display& (0+255),c
+   749  007E8C  0EBA               	movlw	186
+   750  007E8E                     u387:
+   751  007E8E  2EE8               	decfsz	wreg,f,c
+   752  007E90  D7FE               	bra	u387
+   753  007E92  2E01               	decfsz	??_inicializar_display& (0+255),f,c
+   754  007E94  D7FC               	bra	u387
+   755  007E96  2E02               	decfsz	(??_inicializar_display+1)& (0+255),f,c
+   756  007E98  D7FA               	bra	u387
+   757  007E9A  D000               	nop2	
+   758                           
+   759                           ;lcd-teclado.c: 74:    LATD = 0b00000001;
+   760  007E9C  0E01               	movlw	1
+   761  007E9E  6E8C               	movwf	3980,c	;volatile
+   762                           
+   763                           ;lcd-teclado.c: 75:    LATCbits.LATC1 = 1;
+   764  007EA0  828B               	bsf	3979,1,c	;volatile
+   765                           
+   766                           ;lcd-teclado.c: 76:    LATCbits.LATC1 = 0;
+   767  007EA2  928B               	bcf	3979,1,c	;volatile
+   768                           
+   769                           ;lcd-teclado.c: 77:    _delay((unsigned long)((1)*(8000000/4000.0)));
+   770  007EA4  0E03               	movlw	3
+   771  007EA6  6E01               	movwf	??_inicializar_display& (0+255),c
+   772  007EA8  0E98               	movlw	152
+   773  007EAA                     u397:
+   774  007EAA  2EE8               	decfsz	wreg,f,c
+   775  007EAC  D7FE               	bra	u397
+   776  007EAE  2E01               	decfsz	??_inicializar_display& (0+255),f,c
+   777  007EB0  D7FC               	bra	u397
+   778  007EB2  0012               	return		;funcret
+   779  007EB4                     __end_of_inicializar_display:
+   780                           	opt callstack 0
+   781                           
+   782 ;; *************** function _envia_char_serial *****************
+   783 ;; Defined at:
+   784 ;;		line 88 in file "lcd-teclado.c"
+   785 ;; Parameters:    Size  Location     Type
+   786 ;;  dado            1    wreg     unsigned char 
+   787 ;; Auto vars:     Size  Location     Type
+   788 ;;  dado            1    2[COMRAM] unsigned char 
+   789 ;;  i               2    0[COMRAM] int 
+   790 ;; Return value:  Size  Location     Type
+   791 ;;                  1    wreg      void 
+   792 ;; Registers used:
+   793 ;;		wreg, status,2, status,0
+   794 ;; Tracked objects:
+   795 ;;		On entry : 0/0
+   796 ;;		On exit  : 0/0
+   797 ;;		Unchanged: 0/0
+   798 ;; Data sizes:     COMRAM   BANK0   BANK1   BANK2   BANK3   BANK4   BANK5   BANK6   BANK7
+   799 ;;      Params:         0       0       0       0       0       0       0       0       0
+   800 ;;      Locals:         3       0       0       0       0       0       0       0       0
+   801 ;;      Temps:          0       0       0       0       0       0       0       0       0
+   802 ;;      Totals:         3       0       0       0       0       0       0       0       0
+   803 ;;Total ram usage:        3 bytes
+   804 ;; Hardware stack levels used:    1
+   805 ;; This function calls:
+   806 ;;		Nothing
+   807 ;; This function is called by:
+   808 ;;		_main
+   809 ;; This function uses a non-reentrant model
+   810 ;;
+   811                           
+   812                           	psect	text4
+   813  007DE4                     __ptext4:
+   814                           	opt callstack 0
+   815  007DE4                     _envia_char_serial:
+   816                           	opt callstack 30
+   817                           
+   818                           ;incstack = 0
+   819                           ;envia_char_serial@dado stored from wreg
+   820  007DE4  6E03               	movwf	envia_char_serial@dado,c
+   821                           
+   822                           ;lcd-teclado.c: 88: void envia_char_serial(char dado);lcd-teclado.c: 89: {;lcd-teclado.c
+      +                          : 90:     LATCbits.LATC6 = 1;
+   823  007DE6  8C8B               	bsf	3979,6,c	;volatile
+   824                           
+   825                           ;lcd-teclado.c: 91:     _delay((unsigned long)((833)*(8000000/4000000.0)));
+   826  007DE8  0EEE               	movlw	238
+   827  007DEA                     u407:
+   828  007DEA  D000               	nop2	
+   829  007DEC  D000               	nop2	
+   830  007DEE  2EE8               	decfsz	wreg,f,c
+   831  007DF0  D7FC               	bra	u407
+   832                           
+   833                           ;lcd-teclado.c: 92:     LATCbits.LATC6 = 0;
+   834  007DF2  9C8B               	bcf	3979,6,c	;volatile
+   835                           
+   836                           ;lcd-teclado.c: 93:     _delay((unsigned long)((833)*(8000000/4000000.0)));
+   837  007DF4  0EEE               	movlw	238
+   838  007DF6                     u417:
+   839  007DF6  D000               	nop2	
+   840  007DF8  D000               	nop2	
+   841  007DFA  2EE8               	decfsz	wreg,f,c
+   842  007DFC  D7FC               	bra	u417
+   843                           
+   844                           ;lcd-teclado.c: 94:     for(int i = 0;i<8;i++)
+   845  007DFE  0E00               	movlw	0
+   846  007E00  6E02               	movwf	envia_char_serial@i+1,c
+   847  007E02  0E00               	movlw	0
+   848  007E04  6E01               	movwf	envia_char_serial@i,c
+   849  007E06                     l54:
+   850                           
+   851                           ;lcd-teclado.c: 95:     {;lcd-teclado.c: 96:         LATCbits.LATC6 = dado;
+   852  007E06  B003               	btfsc	envia_char_serial@dado,0,c
+   853  007E08  D002               	bra	u285
+   854  007E0A  9C8B               	bcf	3979,6,c	;volatile
+   855  007E0C  D001               	bra	u286
+   856  007E0E                     u285:
+   857  007E0E  8C8B               	bsf	3979,6,c	;volatile
+   858  007E10                     u286:
+   859                           
+   860                           ;lcd-teclado.c: 97:         dado = dado>>1;
+   861  007E10  90D8               	bcf	status,0,c
+   862  007E12  3003               	rrcf	envia_char_serial@dado,w,c
+   863  007E14  6E03               	movwf	envia_char_serial@dado,c
+   864                           
+   865                           ;lcd-teclado.c: 98:         _delay((unsigned long)((833)*(8000000/4000000.0)));
+   866  007E16  0EEE               	movlw	238
+   867  007E18                     u427:
+   868  007E18  D000               	nop2	
+   869  007E1A  D000               	nop2	
+   870  007E1C  2EE8               	decfsz	wreg,f,c
+   871  007E1E  D7FC               	bra	u427
+   872                           
+   873                           ;lcd-teclado.c: 99:     }
+   874  007E20  4A01               	infsnz	envia_char_serial@i,f,c
+   875  007E22  2A02               	incf	envia_char_serial@i+1,f,c
+   876  007E24  BE02               	btfsc	envia_char_serial@i+1,7,c
+   877  007E26  D7EF               	goto	l54
+   878  007E28  5002               	movf	envia_char_serial@i+1,w,c
+   879  007E2A  E104               	bnz	u290
+   880  007E2C  0E08               	movlw	8
+   881  007E2E  5C01               	subwf	envia_char_serial@i,w,c
+   882  007E30  A0D8               	btfss	status,0,c
+   883  007E32  D7E9               	goto	l54
+   884  007E34                     u290:
+   885                           
+   886                           ;lcd-teclado.c: 100:     LATCbits.LATC6 = 1;
+   887  007E34  8C8B               	bsf	3979,6,c	;volatile
+   888                           
+   889                           ;lcd-teclado.c: 101:     _delay((unsigned long)((833)*(8000000/4000000.0)));
+   890  007E36  0EEE               	movlw	238
+   891  007E38                     u437:
+   892  007E38  D000               	nop2	
+   893  007E3A  D000               	nop2	
+   894  007E3C  2EE8               	decfsz	wreg,f,c
+   895  007E3E  D7FC               	bra	u437
+   896  007E40  0012               	return		;funcret
+   897  007E42                     __end_of_envia_char_serial:
+   898                           	opt callstack 0
+   899                           
+   900 ;; *************** function _envia_char_display *****************
+   901 ;; Defined at:
+   902 ;;		line 79 in file "lcd-teclado.c"
+   903 ;; Parameters:    Size  Location     Type
+   904 ;;  dado            1    wreg     unsigned char 
+   905 ;; Auto vars:     Size  Location     Type
+   906 ;;  dado            1    1[COMRAM] unsigned char 
+   907 ;; Return value:  Size  Location     Type
+   908 ;;                  1    wreg      void 
+   909 ;; Registers used:
+   910 ;;		wreg, status,2, cstack
+   911 ;; Tracked objects:
+   912 ;;		On entry : 0/0
+   913 ;;		On exit  : 0/0
+   914 ;;		Unchanged: 0/0
+   915 ;; Data sizes:     COMRAM   BANK0   BANK1   BANK2   BANK3   BANK4   BANK5   BANK6   BANK7
+   916 ;;      Params:         0       0       0       0       0       0       0       0       0
+   917 ;;      Locals:         1       0       0       0       0       0       0       0       0
+   918 ;;      Temps:          1       0       0       0       0       0       0       0       0
+   919 ;;      Totals:         2       0       0       0       0       0       0       0       0
+   920 ;;Total ram usage:        2 bytes
+   921 ;; Hardware stack levels used:    1
+   922 ;; This function calls:
+   923 ;;		Nothing
+   924 ;; This function is called by:
+   925 ;;		_main
+   926 ;; This function uses a non-reentrant model
+   927 ;;
+   928                           
+   929                           	psect	text5
+   930  007D62                     __ptext5:
+   931                           	opt callstack 0
+   932  007D62                     _envia_char_display:
+   933                           	opt callstack 30
+   934                           
+   935                           ;incstack = 0
+   936                           ;envia_char_display@dado stored from wreg
+   937  007D62  6E02               	movwf	envia_char_display@dado,c
+   938                           
+   939                           ;lcd-teclado.c: 79: void envia_char_display(char dado );lcd-teclado.c: 80: {;lcd-teclado
+      +                          .c: 81:     LATCbits.LATC1 = 0;
+   940  007D64  928B               	bcf	3979,1,c	;volatile
+   941                           
+   942                           ;lcd-teclado.c: 82:     LATCbits.LATC0 = 1;
+   943  007D66  808B               	bsf	3979,0,c	;volatile
+   944                           
+   945                           ;lcd-teclado.c: 83:     LATD = dado;
+   946  007D68  C002  FF8C         	movff	envia_char_display@dado,3980	;volatile
+   947                           
+   948                           ;lcd-teclado.c: 84:     LATCbits.LATC1 = 1;
+   949  007D6C  828B               	bsf	3979,1,c	;volatile
+   950                           
+   951                           ;lcd-teclado.c: 85:     LATCbits.LATC1 = 0;
+   952  007D6E  928B               	bcf	3979,1,c	;volatile
+   953                           
+   954                           ;lcd-teclado.c: 86:     _delay((unsigned long)((1)*(8000000/4000.0)));
+   955  007D70  0E03               	movlw	3
+   956  007D72  6E01               	movwf	??_envia_char_display& (0+255),c
+   957  007D74  0E98               	movlw	152
+   958  007D76                     u447:
+   959  007D76  2EE8               	decfsz	wreg,f,c
+   960  007D78  D7FE               	bra	u447
+   961  007D7A  2E01               	decfsz	??_envia_char_display& (0+255),f,c
+   962  007D7C  D7FC               	bra	u447
+   963  007D7E  0012               	return		;funcret
+   964  007D80                     __end_of_envia_char_display:
+   965                           	opt callstack 0
+   966                           
+   967 ;; *************** function _Configura_Portas *****************
+   968 ;; Defined at:
+   969 ;;		line 42 in file "lcd-teclado.c"
+   970 ;; Parameters:    Size  Location     Type
+   971 ;;		None
+   972 ;; Auto vars:     Size  Location     Type
+   973 ;;		None
+   974 ;; Return value:  Size  Location     Type
+   975 ;;                  1    wreg      void 
+   976 ;; Registers used:
+   977 ;;		wreg, status,2
+   978 ;; Tracked objects:
+   979 ;;		On entry : 0/0
+   980 ;;		On exit  : 0/0
+   981 ;;		Unchanged: 0/0
+   982 ;; Data sizes:     COMRAM   BANK0   BANK1   BANK2   BANK3   BANK4   BANK5   BANK6   BANK7
+   983 ;;      Params:         0       0       0       0       0       0       0       0       0
+   984 ;;      Locals:         0       0       0       0       0       0       0       0       0
+   985 ;;      Temps:          0       0       0       0       0       0       0       0       0
+   986 ;;      Totals:         0       0       0       0       0       0       0       0       0
+   987 ;;Total ram usage:        0 bytes
+   988 ;; Hardware stack levels used:    1
+   989 ;; This function calls:
+   990 ;;		Nothing
+   991 ;; This function is called by:
+   992 ;;		_main
+   993 ;; This function uses a non-reentrant model
+   994 ;;
+   995                           
+   996                           	psect	text6
+   997  007D80                     __ptext6:
+   998                           	opt callstack 0
+   999  007D80                     _Configura_Portas:
+  1000                           	opt callstack 30
+  1001                           
+  1002                           ;lcd-teclado.c: 44:     ADCON1 = 0x0F;
+  1003                           
+  1004                           ;incstack = 0
+  1005  007D80  0E0F               	movlw	15
+  1006  007D82  6EC1               	movwf	4033,c	;volatile
+  1007                           
+  1008                           ;lcd-teclado.c: 45:     TRISD = 0b00000000;
+  1009  007D84  0E00               	movlw	0
+  1010  007D86  6E95               	movwf	3989,c	;volatile
+  1011                           
+  1012                           ;lcd-teclado.c: 46:     TRISCbits.RC0 = 0;
+  1013  007D88  9094               	bcf	3988,0,c	;volatile
+  1014                           
+  1015                           ;lcd-teclado.c: 47:     TRISCbits.RC1 = 0;
+  1016  007D8A  9294               	bcf	3988,1,c	;volatile
+  1017                           
+  1018                           ;lcd-teclado.c: 48:     TRISCbits.RC6 = 0;
+  1019  007D8C  9C94               	bcf	3988,6,c	;volatile
+  1020                           
+  1021                           ;lcd-teclado.c: 49:     TRISCbits.RC7 = 1;
+  1022  007D8E  8E94               	bsf	3988,7,c	;volatile
+  1023                           
+  1024                           ;lcd-teclado.c: 50:     TRISBbits.RB0 = 0;
+  1025  007D90  9093               	bcf	3987,0,c	;volatile
+  1026                           
+  1027                           ;lcd-teclado.c: 51:     TRISBbits.RB1 = 0;
+  1028  007D92  9293               	bcf	3987,1,c	;volatile
+  1029                           
+  1030                           ;lcd-teclado.c: 52:     TRISBbits.RB2 = 0;
+  1031  007D94  9493               	bcf	3987,2,c	;volatile
+  1032                           
+  1033                           ;lcd-teclado.c: 53:     TRISBbits.RB3 = 1;
+  1034  007D96  8693               	bsf	3987,3,c	;volatile
+  1035                           
+  1036                           ;lcd-teclado.c: 54:     TRISBbits.RB4 = 1;
+  1037  007D98  8893               	bsf	3987,4,c	;volatile
+  1038                           
+  1039                           ;lcd-teclado.c: 55:     TRISBbits.RB5 = 1;
+  1040  007D9A  8A93               	bsf	3987,5,c	;volatile
+  1041                           
+  1042                           ;lcd-teclado.c: 56:     TRISBbits.RB6 = 1;
+  1043  007D9C  8C93               	bsf	3987,6,c	;volatile
+  1044  007D9E  0012               	return		;funcret
+  1045  007DA0                     __end_of_Configura_Portas:
+  1046                           	opt callstack 0
+  1047  0000                     
+  1048                           	psect	rparam
+  1049  0000                     tosu	equ	0xFFF
+  1050                           tosh	equ	0xFFE
+  1051                           tosl	equ	0xFFD
+  1052                           stkptr	equ	0xFFC
+  1053                           pclatu	equ	0xFFB
+  1054                           pclath	equ	0xFFA
+  1055                           pcl	equ	0xFF9
+  1056                           tblptru	equ	0xFF8
+  1057                           tblptrh	equ	0xFF7
+  1058                           tblptrl	equ	0xFF6
+  1059                           tablat	equ	0xFF5
+  1060                           prodh	equ	0xFF4
+  1061                           prodl	equ	0xFF3
+  1062                           indf0	equ	0xFEF
+  1063                           postinc0	equ	0xFEE
+  1064                           postdec0	equ	0xFED
+  1065                           preinc0	equ	0xFEC
+  1066                           plusw0	equ	0xFEB
+  1067                           fsr0h	equ	0xFEA
+  1068                           fsr0l	equ	0xFE9
+  1069                           wreg	equ	0xFE8
+  1070                           indf1	equ	0xFE7
+  1071                           postinc1	equ	0xFE6
+  1072                           postdec1	equ	0xFE5
+  1073                           preinc1	equ	0xFE4
+  1074                           plusw1	equ	0xFE3
+  1075                           fsr1h	equ	0xFE2
+  1076                           fsr1l	equ	0xFE1
+  1077                           bsr	equ	0xFE0
+  1078                           indf2	equ	0xFDF
+  1079                           postinc2	equ	0xFDE
+  1080                           postdec2	equ	0xFDD
+  1081                           preinc2	equ	0xFDC
+  1082                           plusw2	equ	0xFDB
+  1083                           fsr2h	equ	0xFDA
+  1084                           fsr2l	equ	0xFD9
+  1085                           status	equ	0xFD8
+
+
+Data Sizes:
+    Strings     0
+    Constant    0
+    Data        0
+    BSS         0
+    Persistent  0
+    Stack       0
+
+Auto Spaces:
+    Space          Size  Autos    Used
+    COMRAM           95     20      20
+    BANK0           160      0       0
+    BANK1           256      0       0
+    BANK2           256      0       0
+    BANK3           256      0       0
+    BANK4           256      0       0
+    BANK5           256      0       0
+    BANK6           256      0       0
+    BANK7           256      0       0
+
+Pointer List with Targets:
+
+    None.
+
+Critical Paths under _main in COMRAM
+
+    _main->_recebe_char_serial
+
+Critical Paths under _main in BANK0
+
+    None.
+
+Critical Paths under _main in BANK1
+
+    None.
+
+Critical Paths under _main in BANK2
+
+    None.
+
+Critical Paths under _main in BANK3
+
+    None.
+
+Critical Paths under _main in BANK4
+
+    None.
+
+Critical Paths under _main in BANK5
+
+    None.
+
+Critical Paths under _main in BANK6
+
+    None.
+
+Critical Paths under _main in BANK7
+
+    None.
+
+Call Graph Tables:
+
+ ---------------------------------------------------------------------------------
+ (Depth) Function   	        Calls       Base Space   Used Autos Params    Refs
+ ---------------------------------------------------------------------------------
+ (0) _main                                                 5     5      0     300
+                                             15 COMRAM     5     5      0
+                   _Configura_Portas
+                 _envia_char_display
+                  _envia_char_serial
+                _inicializar_display
+                 _recebe_char_serial
+                  _varredura_teclado
+ ---------------------------------------------------------------------------------
+ (1) _varredura_teclado                                    0     0      0       0
+ ---------------------------------------------------------------------------------
+ (1) _recebe_char_serial                                  17    17      0     165
+                                              0 COMRAM    15    15      0
+ ---------------------------------------------------------------------------------
+ (1) _inicializar_display                                  2     2      0       0
+                                              0 COMRAM     2     2      0
+ ---------------------------------------------------------------------------------
+ (1) _envia_char_serial                                    3     3      0      60
+                                              0 COMRAM     3     3      0
+ ---------------------------------------------------------------------------------
+ (1) _envia_char_display                                   2     2      0      15
+                                              0 COMRAM     2     2      0
+ ---------------------------------------------------------------------------------
+ (1) _Configura_Portas                                     0     0      0       0
+ ---------------------------------------------------------------------------------
+ Estimated maximum stack depth 1
+ ---------------------------------------------------------------------------------
+
+ Call Graph Graphs:
+
+ _main (ROOT)
+   _Configura_Portas
+   _envia_char_display
+   _envia_char_serial
+   _inicializar_display
+   _recebe_char_serial
+   _varredura_teclado
+
+ Address spaces:
+Name               Size   Autos  Total    Cost      Usage
+BITCOMRAM           5F      0       0       0        0.0%
+EEDATA             100      0       0       0        0.0%
+NULL                 0      0       0       0        0.0%
+CODE                 0      0       0       0        0.0%
+COMRAM              5F     14      14       1       21.1%
+STACK                0      0       0       2        0.0%
+DATA                 0      0       0       3        0.0%
+BITBANK0            A0      0       0       4        0.0%
+BANK0               A0      0       0       5        0.0%
+BITBANK1           100      0       0       6        0.0%
+BANK1              100      0       0       7        0.0%
+BITBANK2           100      0       0       8        0.0%
+BANK2              100      0       0       9        0.0%
+BITBANK3           100      0       0      10        0.0%
+BANK3              100      0       0      11        0.0%
+BITBANK4           100      0       0      12        0.0%
+BANK4              100      0       0      13        0.0%
+BITBANK5           100      0       0      14        0.0%
+BANK5              100      0       0      15        0.0%
+BITBANK6           100      0       0      16        0.0%
+BANK6              100      0       0      17        0.0%
+BITBANK7           100      0       0      18        0.0%
+BANK7              100      0       0      19        0.0%
+ABS                  0      0       0      20        0.0%
+BIGRAM             7FF      0       0      21        0.0%
+BITSFR               0      0       0     200        0.0%
+SFR                  0      0       0     200        0.0%
+
+
+Microchip Technology PIC18 Macro Assembler V2.05 build -831301201 
+Symbol Table                                                                                   Mon Apr 08 14:46:31 2019
+
+                          l54 7E06                            l71 7F8A                            l72 7F72  
+                          l90 7FC0                            l66 7F66                            l91 7FA8  
+                          l77 7F7E                            l86 7F9C                            l96 7FB4  
+                          u10 7EF0                            u20 7F1C                            u30 7F50  
+                          u16 7EF2                            u40 7F5E                            u60 7F6A  
+                          u80 7F76                           l110 7FDE                           l105 7FD2  
+                         l115 7FEA                           l109 7FF6                           l875 7F24  
+                         l859 7EDC                           u100 7F82                           u200 7FCA  
+                         u120 7F94                           u220 7FD6                           u140 7FA0  
+                         u300 7DB2                           u240 7FE2                           u160 7FAC  
+                         u260 7FEE                           u180 7FB8                           u308 7DB4  
+                         u407 7DEA                           u417 7DF6                           u337 7EC2  
+                         u290 7E34                           u427 7E18                           u347 7ECC  
+                         u437 7E38                           u285 7E0E                           u357 7EFC  
+                         u286 7E10                           u447 7D76                           u367 7E4C  
+                         u377 7E6E                           u387 7E8E                           u397 7EAA  
+                         wreg 000FE8                          l1023 7DCE                          l1015 7DA8  
+                        _LATD 000F8C                          _main 7DA0                          indf2 000FDF  
+                        fsr2l 000FD9     __size_of_Configura_Portas 0020                          start 0000  
+                ___param_bank 000000                         ?_main 0001        recebe_char_serial@dado 000F  
+__size_of_inicializar_display 0072                         _TRISD 000F95                         main@x 0011  
+                       status 000FD8               __initialization 7D5C                  __end_of_main 7DE4  
+                      ??_main 0010                 __activetblptr 000000    __end_of_envia_char_display 7D80  
+                      _ADCON1 000FC1   __size_of_recebe_char_serial 00A0             _envia_char_serial 7DE4  
+          ?_envia_char_serial 0001                    __accesstop 0060       __end_of__initialization 7D5C  
+         ??_envia_char_serial 0001              _Configura_Portas 7D80                 ___rparam_used 000001  
+              __pcstackCOMRAM 0001     __end_of_envia_char_serial 7E42           _inicializar_display 7E42  
+        ?_inicializar_display 0001                       __Hparam 0000                       __Lparam 0000  
+                     __pcinit 7D5C                       __ramtop 0800         ??_inicializar_display 0001  
+                     __ptext0 7DA0                       __ptext1 7F54                       __ptext2 7EB4  
+                     __ptext3 7E42                       __ptext4 7DE4                       __ptext5 7D62  
+                     __ptext6 7D80    __size_of_envia_char_serial 005E          end_of_initialization 7D5C  
+          _envia_char_display 7D62   recebe_char_serial@invertido 0001           ?_envia_char_display 0001  
+                   _PORTBbits 000F81                     _PORTCbits 000F82      __end_of_Configura_Portas 7DA0  
+        ??_envia_char_display 0001                     _TRISBbits 000F93                     _TRISCbits 000F94  
+       envia_char_serial@dado 0003             _varredura_teclado 7F54    __end_of_recebe_char_serial 7F54  
+          ?_varredura_teclado 0001           start_initialization 7D5C            envia_char_serial@i 0001  
+         ??_varredura_teclado 0001     __end_of_varredura_teclado 8000           recebe_char_serial@i 000B  
+         recebe_char_serial@j 0009           recebe_char_serial@x 000D        envia_char_display@dado 0002  
+                    _LATBbits 000F8A                      _LATCbits 000F8B    __size_of_varredura_teclado 00AC  
+ __end_of_inicializar_display 7EB4                     main@carac 0013             ?_Configura_Portas 0001  
+          ??_Configura_Portas 0001                      __Hrparam 0000                      __Lrparam 0000  
+ __size_of_envia_char_display 001E            _recebe_char_serial 7EB4                 __size_of_main 0044  
+         ?_recebe_char_serial 0001                      main@dado 0014          ??_recebe_char_serial 0001  
